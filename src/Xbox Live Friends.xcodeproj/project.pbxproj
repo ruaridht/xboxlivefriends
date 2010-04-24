@@ -170,6 +170,11 @@
 		552129301180D7EC007E979C /* game_list_row.htm in Resources */ = {isa = PBXBuildFile; fileRef = 5521292E1180D7EC007E979C /* game_list_row.htm */; };
 		552129311180D7EC007E979C /* achievement_row_self.htm in Resources */ = {isa = PBXBuildFile; fileRef = 5521292F1180D7EC007E979C /* achievement_row_self.htm */; };
 		55395673117E56B7000F5530 /* error-bang.gif in Resources */ = {isa = PBXBuildFile; fileRef = 55395672117E56B7000F5530 /* error-bang.gif */; };
+		5566701211825F8D003D4A3E /* account_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = 5566701111825F8D003D4A3E /* account_tab.png */; };
+		55667020118260FC003D4A3E /* AIAccountSummaryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5566701F118260FC003D4A3E /* AIAccountSummaryController.m */; };
+		5566703A118265AA003D4A3E /* toolbar_account.png in Resources */ = {isa = PBXBuildFile; fileRef = 55667039118265AA003D4A3E /* toolbar_account.png */; };
+		5566705A11826BA3003D4A3E /* error_exclamation.png in Resources */ = {isa = PBXBuildFile; fileRef = 5566705811826BA3003D4A3E /* error_exclamation.png */; };
+		5566705B11826BA3003D4A3E /* success_checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 5566705911826BA3003D4A3E /* success_checkmark.png */; };
 		55791CAF117DEC3F009FECBB /* GIFriendsOfGamerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55791CAE117DEC3F009FECBB /* GIFriendsOfGamerController.m */; };
 		55910544117B4EAA0012E9E5 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55910543117B4EAA0012E9E5 /* QuickLook.framework */; };
 		55994DD4117F7BA9006706D6 /* XBAccountInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55994DD3117F7BA9006706D6 /* XBAccountInfoController.m */; };
@@ -420,6 +425,12 @@
 		5521292E1180D7EC007E979C /* game_list_row.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = game_list_row.htm; sourceTree = "<group>"; };
 		5521292F1180D7EC007E979C /* achievement_row_self.htm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = achievement_row_self.htm; sourceTree = "<group>"; };
 		55395672117E56B7000F5530 /* error-bang.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "error-bang.gif"; sourceTree = "<group>"; };
+		5566701111825F8D003D4A3E /* account_tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = account_tab.png; sourceTree = "<group>"; };
+		5566701E118260FC003D4A3E /* AIAccountSummaryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIAccountSummaryController.h; sourceTree = "<group>"; };
+		5566701F118260FC003D4A3E /* AIAccountSummaryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIAccountSummaryController.m; sourceTree = "<group>"; };
+		55667039118265AA003D4A3E /* toolbar_account.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = toolbar_account.png; sourceTree = "<group>"; };
+		5566705811826BA3003D4A3E /* error_exclamation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error_exclamation.png; sourceTree = "<group>"; };
+		5566705911826BA3003D4A3E /* success_checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = success_checkmark.png; sourceTree = "<group>"; };
 		55791CAD117DEC3F009FECBB /* GIFriendsOfGamerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIFriendsOfGamerController.h; sourceTree = "<group>"; };
 		55791CAE117DEC3F009FECBB /* GIFriendsOfGamerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GIFriendsOfGamerController.m; sourceTree = "<group>"; };
 		55910543117B4EAA0012E9E5 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
@@ -836,6 +847,7 @@
 			children = (
 				3B463BC60A928CB3004E500D /* Beads */,
 				3BA852A10DCD6BF300602576 /* toolbar_achievements.png */,
+				55667039118265AA003D4A3E /* toolbar_account.png */,
 				3BC8E2AC0AF337B400770196 /* defaultfriend.png */,
 				3B049A070ABD1DA5002EA246 /* divider_friendslist_top.png */,
 				3B049A080ABD1DA5002EA246 /* divider_friendslist_bottom.png */,
@@ -949,6 +961,18 @@
 			name = HTML;
 			sourceTree = "<group>";
 		};
+		5566700C11825F4B003D4A3E /* Account Summary View */ = {
+			isa = PBXGroup;
+			children = (
+				5566701111825F8D003D4A3E /* account_tab.png */,
+				5566705811826BA3003D4A3E /* error_exclamation.png */,
+				5566705911826BA3003D4A3E /* success_checkmark.png */,
+				5566701E118260FC003D4A3E /* AIAccountSummaryController.h */,
+				5566701F118260FC003D4A3E /* AIAccountSummaryController.m */,
+			);
+			name = "Account Summary View";
+			sourceTree = "<group>";
+		};
 		55791CA1117DE89B009FECBB /* Friends of Friend View */ = {
 			isa = PBXGroup;
 			children = (
@@ -978,6 +1002,7 @@
 				55994E5F117FB73C006706D6 /* Recently Played View */,
 				55994E60117FB748006706D6 /* Halo 3 Service Record View */,
 				55994E61117FB755006706D6 /* Halo 3 Screenshots View */,
+				5566700C11825F4B003D4A3E /* Account Summary View */,
 			);
 			name = "Account Info";
 			sourceTree = "<group>";
@@ -1171,6 +1196,10 @@
 				5521292D1180D760007E979C /* game_list_body.htm in Resources */,
 				552129301180D7EC007E979C /* game_list_row.htm in Resources */,
 				552129311180D7EC007E979C /* achievement_row_self.htm in Resources */,
+				5566701211825F8D003D4A3E /* account_tab.png in Resources */,
+				5566703A118265AA003D4A3E /* toolbar_account.png in Resources */,
+				5566705A11826BA3003D4A3E /* error_exclamation.png in Resources */,
+				5566705B11826BA3003D4A3E /* success_checkmark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1251,6 +1280,7 @@
 				55994E73117FB89B006706D6 /* AIHaloScreenshotsController.m in Sources */,
 				55101F1A1180912000DF70E8 /* AccountInfoParser.m in Sources */,
 				55F170A91181F7A90027D69E /* RecentlyPlayedParser.m in Sources */,
+				55667020118260FC003D4A3E /* AIAccountSummaryController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

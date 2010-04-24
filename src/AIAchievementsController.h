@@ -15,6 +15,7 @@
 	IBOutlet NSPopUpButton *filterPopup;
 	IBOutlet NSTextField *searchField;
 	
+	NSArray *gamesPlayed;
 }
 
 - (IBAction)refilter:(id)sender;

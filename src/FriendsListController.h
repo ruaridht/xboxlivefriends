@@ -29,8 +29,6 @@
 	IBOutlet NSImageView *myBead;
 	IBOutlet NSTextField *myScore;
 	
-	IBOutlet NSButton *myHiddenTag;
-	
 	//menu bar
 	IBOutlet NSMenuItem *deleteFriendMenu;
 	

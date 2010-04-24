@@ -21,7 +21,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="21"/>
+			<integer value="3471"/>
+			<integer value="2"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -662,24 +663,24 @@
 								<bytes key="NSRGB">MC43MDE5NjA4MDIxIDAuNzYwNzg0Mzg3NiAwLjgzMTM3MjYxODcAA</bytes>
 							</object>
 						</object>
-						<object class="NSButton" id="659936687">
+						<object class="NSButton" id="477161984">
 							<reference key="NSNextResponder" ref="130445688"/>
 							<int key="NSvFlags">289</int>
-							<string key="NSFrame">{{161, 9}, {154, 19}}</string>
+							<string key="NSFrame">{{280, 4}, {36, 25}}</string>
 							<reference key="NSSuperview" ref="130445688"/>
 							<bool key="NSEnabled">YES</bool>
-							<object class="NSButtonCell" key="NSCell" id="602999751">
-								<int key="NSCellFlags">-1543373312</int>
-								<int key="NSCellFlags2">0</int>
-								<string key="NSContents">Gamertag</string>
-								<object class="NSFont" key="NSSupport" id="476385686">
-									<string key="NSName">LucidaGrande</string>
-									<double key="NSSize">13</double>
-									<int key="NSfFlags">16</int>
+							<object class="NSButtonCell" key="NSCell" id="749865844">
+								<int key="NSCellFlags">67239424</int>
+								<int key="NSCellFlags2">134217728</int>
+								<string key="NSContents"/>
+								<reference key="NSSupport" ref="74793564"/>
+								<reference key="NSControlView" ref="477161984"/>
+								<int key="NSButtonFlags">-2033434369</int>
+								<int key="NSButtonFlags2">32</int>
+								<object class="NSCustomResource" key="NSNormalImage">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">toolbar_account</string>
 								</object>
-								<reference key="NSControlView" ref="659936687"/>
-								<int key="NSButtonFlags">-2046541569</int>
-								<int key="NSButtonFlags2">164</int>
 								<string key="NSAlternateContents"/>
 								<string key="NSKeyEquivalent"/>
 								<int key="NSPeriodicDelay">400</int>
@@ -956,6 +957,15 @@
 									<bool key="NSIsSeparator">YES</bool>
 									<string key="NSTitle"/>
 									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="366204859"/>
+									<reference key="NSMixedImage" ref="107370164"/>
+								</object>
+								<object class="NSMenuItem" id="877139670">
+									<reference key="NSMenu" ref="196284771"/>
+									<string key="NSTitle">My Info</string>
+									<string key="NSKeyEquiv">i</string>
+									<int key="NSKeyEquivModMask">1310720</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="366204859"/>
 									<reference key="NSMixedImage" ref="107370164"/>
@@ -4856,7 +4866,11 @@ AAAAAAAAA</bytes>
 								<int key="NSCellFlags">67239424</int>
 								<int key="NSCellFlags2">272629760</int>
 								<string key="NSContents">Xbox Live Friends asks for your Windows Live ID sign-in information for the explicit task of logging in to Xbox.com to access your Xbox Live friends list. </string>
-								<reference key="NSSupport" ref="476385686"/>
+								<object class="NSFont" key="NSSupport" id="476385686">
+									<string key="NSName">LucidaGrande</string>
+									<double key="NSSize">13</double>
+									<int key="NSfFlags">16</int>
+								</object>
 								<reference key="NSControlView" ref="62454802"/>
 								<reference key="NSBackgroundColor" ref="593754950"/>
 								<reference key="NSTextColor" ref="909073604"/>
@@ -6560,20 +6574,40 @@ AAAAAAAAA</bytes>
 					<int key="connectionID">3854</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: values.friendsListIsLoadedAndReady</string>
+						<reference key="source" ref="477161984"/>
+						<reference key="destination" ref="723292381"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="477161984"/>
+							<reference key="NSDestination" ref="723292381"/>
+							<string key="NSLabel">enabled: values.friendsListIsLoadedAndReady</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">values.friendsListIsLoadedAndReady</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSRaisesForNotApplicableKeys</string>
+								<boolean value="NO" key="NS.object.0"/>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">3882</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
 						<string key="label">openAccountInfo:</string>
 						<reference key="source" ref="512903019"/>
-						<reference key="destination" ref="659936687"/>
+						<reference key="destination" ref="477161984"/>
 					</object>
-					<int key="connectionID">3874</int>
+					<int key="connectionID">3883</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">myHiddenTag</string>
+					<object class="IBActionConnection" key="connection">
+						<string key="label">openAccountInfo:</string>
 						<reference key="source" ref="512903019"/>
-						<reference key="destination" ref="659936687"/>
+						<reference key="destination" ref="877139670"/>
 					</object>
-					<int key="connectionID">3876</int>
+					<int key="connectionID">3885</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -6627,7 +6661,7 @@ AAAAAAAAA</bytes>
 							<reference ref="467722189"/>
 							<reference ref="442860821"/>
 							<reference ref="324617757"/>
-							<reference ref="659936687"/>
+							<reference ref="477161984"/>
 						</object>
 						<reference key="parent" ref="81426992"/>
 					</object>
@@ -8488,6 +8522,7 @@ AAAAAAAAA</bytes>
 							<reference ref="794790096"/>
 							<reference ref="265175950"/>
 							<reference ref="615546257"/>
+							<reference ref="877139670"/>
 						</object>
 						<reference key="parent" ref="802844785"/>
 					</object>
@@ -9398,23 +9433,28 @@ AAAAAAAAA</bytes>
 						<reference key="parent" ref="196284771"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">3872</int>
-						<reference key="object" ref="659936687"/>
+						<int key="objectID">3875</int>
+						<reference key="object" ref="706701881"/>
+						<reference key="parent" ref="0"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">3879</int>
+						<reference key="object" ref="477161984"/>
 						<object class="NSMutableArray" key="children">
 							<bool key="EncodedWithXMLCoder">YES</bool>
-							<reference ref="602999751"/>
+							<reference ref="749865844"/>
 						</object>
 						<reference key="parent" ref="130445688"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">3873</int>
-						<reference key="object" ref="602999751"/>
-						<reference key="parent" ref="659936687"/>
+						<int key="objectID">3880</int>
+						<reference key="object" ref="749865844"/>
+						<reference key="parent" ref="477161984"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">3875</int>
-						<reference key="object" ref="706701881"/>
-						<reference key="parent" ref="0"/>
+						<int key="objectID">3884</int>
+						<reference key="object" ref="877139670"/>
+						<reference key="parent" ref="196284771"/>
 					</object>
 				</object>
 			</object>
@@ -9900,8 +9940,10 @@ AAAAAAAAA</bytes>
 					<string>3857.IBPluginDependency</string>
 					<string>3858.IBPluginDependency</string>
 					<string>3869.IBPluginDependency</string>
-					<string>3872.IBPluginDependency</string>
-					<string>3873.IBPluginDependency</string>
+					<string>3879.IBPluginDependency</string>
+					<string>3879.ImportedFromIB2</string>
+					<string>3880.IBPluginDependency</string>
+					<string>3884.IBPluginDependency</string>
 					<string>405.IBPluginDependency</string>
 					<string>405.ImportedFromIB2</string>
 					<string>416.IBEditorWindowLastContentRect</string>
@@ -10159,9 +10201,9 @@ AAAAAAAAA</bytes>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{549, 109}, {335, 463}}</string>
+					<string>{{509, 198}, {335, 463}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{549, 109}, {335, 463}}</string>
+					<string>{{509, 198}, {335, 463}}</string>
 					<integer value="1"/>
 					<integer value="1"/>
 					<string>{{345, 496}, {332, 398}}</string>
@@ -10363,7 +10405,7 @@ AAAAAAAAA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{509, 633}, {245, 203}}</string>
+					<string>{{509, 613}, {245, 223}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{{393, 413}, {248, 163}}</string>
@@ -10575,6 +10617,8 @@ AAAAAAAAA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
+					<integer value="1"/>
+					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
@@ -10760,7 +10804,7 @@ AAAAAAAAA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">3878</int>
+			<int key="maxID">3885</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -10957,7 +11001,6 @@ AAAAAAAAA</bytes>
 							<string>friendsListWindow</string>
 							<string>friendsTable</string>
 							<string>myBead</string>
-							<string>myHiddenTag</string>
 							<string>myMessage</string>
 							<string>myScore</string>
 							<string>myTag</string>
@@ -10975,7 +11018,6 @@ AAAAAAAAA</bytes>
 							<string>NSWindow</string>
 							<string>NSTableView</string>
 							<string>NSImageView</string>
-							<string>NSButton</string>
 							<string>NSTextField</string>
 							<string>NSTextField</string>
 							<string>NSTextField</string>

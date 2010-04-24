@@ -9,6 +9,7 @@
 #import <Cocoa/Cocoa.h>
 #import <Quartz/Quartz.h>
 #import <QuickLook/QuickLook.h>
+#import "GITabController.h"
 
 @interface MyImageObject : NSObject{
     NSString * mPath;

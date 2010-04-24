@@ -42,7 +42,8 @@
 
 - (void)displayAccountInfo:(NSString *)gamertag {
 	NSArray *theInfo = [XBGamesPlayedParser fetchForSelf];
-	NSLog(@"retrieved games"); // NOTE: Retrieve the info from the Achi controller
+	
+	NSLog(@"retrieved games");
 	if (theInfo) {
 		[self displayPieChart:theInfo];
 	}

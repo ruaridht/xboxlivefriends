@@ -49,8 +49,6 @@ static BOOL loadThreaded = true;
 	[[myTag cell] setBackgroundStyle:NSBackgroundStyleRaised];
 	[[myMessage cell] setBackgroundStyle:NSBackgroundStyleRaised];
 	
-	[[myHiddenTag cell] setBackgroundStyle:NSBackgroundStyleRaised];
-	
 	[friendsTable setDelegate:self];
 	[friendsTable setDataSource:self];
 	[friendsTable setDoubleAction: @selector(doubleAction:)];
@@ -287,10 +285,6 @@ static BOOL loadThreaded = true;
 	[myMessage setObjectValue:[myCard motto]];
 	[myScore setStringValue:[myCard gamerscore]];
 	[myTile setImage:[myCard gamertileImage]];
-	
-	[myHiddenTag setTitle:[myCard gamertag]];
-	[myHiddenTag setEnabled:YES];
-
 }
 
 - (void)addFriendFromNotification:(NSNotification *)notification

@@ -70,6 +70,7 @@
 	[records addObject:[self tableViewRecordForTab:@"Service Record" icon:[NSImage imageNamed:@"halo_service_record_tab"] view:accountInfoHaloMultiplayerSRView]];
 	[records addObject:[self tableViewRecordForTab:@"Screenshots" icon:[NSImage imageNamed:@"tab_halo_screenshot"] view:accountInfoHaloScreenshotsView]];
 	[records addObject:[self tableViewRecordForTab:@" ACCOUNT MGMT" icon:[NSNull null] view:[NSNull null]]];
+	[records addObject:[self tableViewRecordForTab:@"Summary" icon:[NSImage imageNamed:@"account_tab"] view:accountInfoAccSummaryView]];
 	
 	[infoTable reloadData];
 	

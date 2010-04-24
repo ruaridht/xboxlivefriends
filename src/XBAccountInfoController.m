@@ -176,6 +176,9 @@
 	if ([currentTabName isEqual:@"Last Played"]) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"AIRecentlyPlayedLoadNotification" object:currentGamertag];
 	}
+	if ([currentTabName isEqual:@"Summary"]) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"AIAccountSummaryLoadNotification" object:currentGamertag];
+	}
 }
 
 - (void)startSpinner:(NSNotification *)notification

@@ -27,7 +27,7 @@
 
 - (void)displayAccountInfo:(NSString *)gamertag {
 	NSLog(@"Displaying Account Achievement Info");
-	NSArray *gamesPlayed = [XBGamesPlayedParser fetchForSelf];
+	gamesPlayed = [XBGamesPlayedParser fetchForSelf];
 	if (gamesPlayed) {
 		NSLog(@"We have the games");
 		[self setLastFetch:gamesPlayed];
@@ -143,87 +143,34 @@
 				//float theirCompletion = [self percentCompletedFromString:[thisGame theirScore]];
 				float myCompletion = [self percentCompletedFromString:[thisGame yourScore]];
 				
-				/*
-				if (popupTag == 1) {
-					if (myScore > 0)
-						shouldDisplayThisGame = YES;
-					else
-						shouldDisplayThisGame = NO;
-					
-				}
-				else if (popupTag == 2) {
-					if (theirIntScore > 0)
-						shouldDisplayThisGame = YES;
-					else
-						shouldDisplayThisGame = NO;
-				}
-				else if (popupTag == 3) {
-					if (theirIntScore > 0 && myScore > 0)
-						shouldDisplayThisGame = YES;
-					else
-						shouldDisplayThisGame = NO;
-				}
-				else if (popupTag == 4) {
-					if (myScore == 0 && theirIntScore > 0)
-						shouldDisplayThisGame = YES;
-					else
-						shouldDisplayThisGame = NO;
-				}
-				else if (popupTag == 5) {
-					if (theirIntScore == 0 && myScore > 0)
-						shouldDisplayThisGame = YES;
-					else
-						shouldDisplayThisGame = NO;
-				}
-				else if (popupTag == 6) {
+				shouldDisplayThisGame = YES;
+				
+				if (popupTag == 6) {
 					if (totalPointsPossible > 250)
 						shouldDisplayThisGame = YES;
 					else
 						shouldDisplayThisGame = NO;
-				}
-				else if (popupTag == 7) {
+				} else if (popupTag == 7) {
 					if (totalPointsPossible <= 250 && totalPointsPossible > 0)
 						shouldDisplayThisGame = YES;
 					else
 						shouldDisplayThisGame = NO;
-				}
-				else if (popupTag == 8) {
+				} else if (popupTag == 8) {
 					if (totalPointsPossible <= 0)
 						shouldDisplayThisGame = YES;
 					else
 						shouldDisplayThisGame = NO;
-				}
-				
-				else if (popupTag == 9) {
-					if (theirCompletion >= 1.0 || myCompletion >= 1.0)
+				} else if (popupTag == 9) {
+					if (myCompletion >= 1.0)
+						shouldDisplayThisGame = YES;
+					else
+						shouldDisplayThisGame = NO;
+				} else if (popupTag == 10) {
+					if (myCompletion < 1.0 && myCompletion > 0.0)
 						shouldDisplayThisGame = YES;
 					else
 						shouldDisplayThisGame = NO;
 				}
-				else if (popupTag == 10) {
-					if (theirCompletion < 1.0 && theirCompletion > 0.0)
-						shouldDisplayThisGame = YES;
-					else if (myCompletion < 1.0 && myCompletion > 0.0)
-						shouldDisplayThisGame = YES;
-					else
-						shouldDisplayThisGame = NO;
-				}
-				else if (popupTag == 11) {
-					if (myScore > theirIntScore && myScore > 0  && theirIntScore > 0)
-						shouldDisplayThisGame = YES;
-					else
-						shouldDisplayThisGame = NO;
-				}
-				else if (popupTag == 12) {
-					if (myScore < theirIntScore && myScore > 0  && theirIntScore > 0)
-						shouldDisplayThisGame = YES;
-					else
-						shouldDisplayThisGame = NO;
-				}
-				 */
-				
-				shouldDisplayThisGame = YES;
-				
 				
 				//filter games list in accordance with search string
 				if ([[searchField stringValue] length] > 0 && [[thisGame name] rangeOfString:[searchField stringValue] options:NSCaseInsensitiveSearch].location == NSNotFound) {
