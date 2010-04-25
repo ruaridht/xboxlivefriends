@@ -13,6 +13,8 @@
 	id lastFetch;
 	NSString *lastFetchTag;
 	NSString *errorForTab;
+	
+	NSArray *gamelistArray;
 }
 
 @property(copy) NSString *lastFetchTag;

@@ -91,7 +91,8 @@ static NSArray *openFiles()
 	else {
 		NSLog(@"info is nil");
 		//[self setErrorForTab:@"No Screenshots"];
-		[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"AIShowErrorTab" object:@"No Screenshots"]];
+		NSString *error = [NSString stringWithFormat:@"No Screenshots"];
+		[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"AIShowErrorTab" object:error]];
 	}
 	
 }

@@ -25,25 +25,30 @@
 	
 	int pageIndex = 0;
 	NSString *thisPageSource = pageSource;
+	// There's no need for this loop since there is a limit on recent screenshots and they are all on the one page.
+	/*
 	while ([thisPageSource rangeOfString:@"Next</a>"].location != NSNotFound) {
 		pageIndex++;
 		NSLog(@"page index: %i", pageIndex);
 		thisPageSource = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.bungie.net/stats/halo3/screenshots.aspx?gamertag=%@&page=%i", gamertag, pageIndex]] encoding:NSUTF8StringEncoding error:nil];
 		pageSource = [pageSource stringByAppendingString:thisPageSource];
 	}
+	 */
 
 	//do the gallery images too
 	NSString *gallerySource = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.bungie.net/stats/halo3/screenshots.aspx?player=%20&mode=pinned", gamertag]] encoding:NSUTF8StringEncoding error:nil];
 	pageSource = [pageSource stringByAppendingString:gallerySource];
 	pageIndex = 0;
 	thisPageSource = gallerySource;
-	while ([thisPageSource rangeOfString:@"Next</a>"].location != NSNotFound) {
-		pageIndex++;
-		NSLog(@"gallery page index: %i", pageIndex);
-		thisPageSource = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.bungie.net/stats/halo3/screenshots.aspx?gamertag=%@&page=%i", gamertag, pageIndex]] encoding:NSUTF8StringEncoding error:nil];
-		pageSource = [pageSource stringByAppendingString:thisPageSource];
+	if (![thisPageSource contains:@"No screenshots have been saved"]) {
+		while ([thisPageSource rangeOfString:@"Next</a>"].location != NSNotFound) {
+			pageIndex++;
+			NSLog(@"gallery page index: %i", pageIndex);
+			thisPageSource = [NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.bungie.net/stats/halo3/screenshots.aspx?gamertag=%@&page=%i", gamertag, pageIndex]] encoding:NSUTF8StringEncoding error:nil];
+			pageSource = [pageSource stringByAppendingString:thisPageSource];
+		}
 	}
-
+	
 	if (![pageSource contains:@".ashx?ssid="])
 		return nil;
 

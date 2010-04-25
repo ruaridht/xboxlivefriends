@@ -27,7 +27,9 @@
 
 - (void)displayAccountInfo:(NSString *)gamertag {
 	NSLog(@"Displaying Account Achievement Info");
+	
 	gamesPlayed = [XBGamesPlayedParser fetchForSelf];
+	
 	if (gamesPlayed) {
 		NSLog(@"We have the games");
 		[self setLastFetch:gamesPlayed];

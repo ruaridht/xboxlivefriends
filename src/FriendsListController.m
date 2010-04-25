@@ -513,9 +513,7 @@ static BOOL loadThreaded = true;
 
 - (IBAction)openAccountInfo:(id)sender
 {
-	NSLog(@"shit yeah secret button");
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"AIRequestLookup" object:nil];
-	//[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"AIRequestLookup" object:nil]];
 }
 
 - (IBAction)contextualGamerInfo:(id)sender{

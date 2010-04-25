@@ -41,12 +41,12 @@
 	
 	NSString *tempComplete = [summarySource cropFrom:@"class=\"XbcMktBillingInfoComplete\">" to:@"</span>"];
 	
-	[billingStatus setStringValue:tempComplete];
-	
 	if ([tempComplete isEqualToString:@"Complete"]) {
 		[billingCompleteLogo setImage:[NSImage imageNamed:@"success_checkmark"]];
+		[billingStatus setStringValue:tempComplete];
 	} else {
 		[billingCompleteLogo setImage:[NSImage imageNamed:@"error_exclamation"]];
+		[billingStatus setStringValue:@"Incomplete"];
 	}
 	
 	NSString *tempName = [summarySource cropFrom:@"Name\" class=\"XbcMktMyAccountAddressLine\">" to:@"</span>"];

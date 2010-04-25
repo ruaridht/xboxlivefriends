@@ -22,7 +22,7 @@
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<integer value="3471"/>
-			<integer value="2"/>
+			<integer value="21"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -799,8 +799,6 @@
 								</object>
 								<object class="NSMenuItem" id="293526944">
 									<reference key="NSMenu" ref="154877937"/>
-									<bool key="NSIsDisabled">YES</bool>
-									<bool key="NSIsHidden">YES</bool>
 									<string key="NSTitle">Check for updates...</string>
 									<string key="NSKeyEquiv"/>
 									<int key="NSKeyEquivModMask">1048576</int>
@@ -2021,6 +2019,10 @@
 				<string key="NSMaxSize">{3.40282e+38, 3.40282e+38}</string>
 			</object>
 			<object class="NSUserDefaultsController" id="723292381">
+				<object class="NSMutableArray" key="NSDeclaredKeys">
+					<bool key="EncodedWithXMLCoder">YES</bool>
+					<string>friendsListIsLoadedAndReady</string>
+				</object>
 				<bool key="NSSharedInstance">YES</bool>
 			</object>
 			<object class="NSWindowTemplate" id="200295471">
@@ -3320,6 +3322,29 @@ xujItMqKzGTOOtAU0efTttV51y/Y4NqP3Dvd6d+f4VvjJOT55uLo3+pD63zsoe257sLvv/Co8YvyVfMY
 												<object class="NSTextView" id="112112121">
 													<reference key="NSNextResponder" ref="984585969"/>
 													<int key="NSvFlags">2322</int>
+													<object class="NSMutableSet" key="NSDragTypes">
+														<bool key="EncodedWithXMLCoder">YES</bool>
+														<object class="NSArray" key="set.sortedObjects">
+															<bool key="EncodedWithXMLCoder">YES</bool>
+															<string>Apple HTML pasteboard type</string>
+															<string>Apple PDF pasteboard type</string>
+															<string>Apple PICT pasteboard type</string>
+															<string>Apple PNG pasteboard type</string>
+															<string>Apple URL pasteboard type</string>
+															<string>CorePasteboardFlavorType 0x6D6F6F76</string>
+															<string>NSColor pasteboard type</string>
+															<string>NSFilenamesPboardType</string>
+															<string>NSStringPboardType</string>
+															<string>NeXT Encapsulated PostScript v1.2 pasteboard type</string>
+															<string>NeXT RTFD pasteboard type</string>
+															<string>NeXT Rich Text Format v1.0 pasteboard type</string>
+															<string>NeXT TIFF v4.0 pasteboard type</string>
+															<string>NeXT font pasteboard type</string>
+															<string>NeXT ruler pasteboard type</string>
+															<string>WebURLsWithTitlesPboardType</string>
+															<string>public.url</string>
+														</object>
+													</object>
 													<string key="NSFrameSize">{431, 14}</string>
 													<reference key="NSSuperview" ref="984585969"/>
 													<object class="NSTextContainer" key="NSTextContainer" id="68296685">
@@ -6609,6 +6634,46 @@ AAAAAAAAA</bytes>
 					</object>
 					<int key="connectionID">3885</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: values.friendsListIsLoadedAndReady</string>
+						<reference key="source" ref="877139670"/>
+						<reference key="destination" ref="723292381"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="877139670"/>
+							<reference key="NSDestination" ref="723292381"/>
+							<string key="NSLabel">enabled: values.friendsListIsLoadedAndReady</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">values.friendsListIsLoadedAndReady</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSRaisesForNotApplicableKeys</string>
+								<boolean value="NO" key="NS.object.0"/>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">3893</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: values.friendsListIsLoadedAndReady</string>
+						<reference key="source" ref="265175950"/>
+						<reference key="destination" ref="723292381"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="265175950"/>
+							<reference key="NSDestination" ref="723292381"/>
+							<string key="NSLabel">enabled: values.friendsListIsLoadedAndReady</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">values.friendsListIsLoadedAndReady</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSRaisesForNotApplicableKeys</string>
+								<boolean value="NO" key="NS.object.0"/>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">3895</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -7609,11 +7674,11 @@ AAAAAAAAA</bytes>
 							<reference ref="492213780"/>
 							<reference ref="229408833"/>
 							<reference ref="775889302"/>
-							<reference ref="692961361"/>
 							<reference ref="84599126"/>
 							<reference ref="934873966"/>
 							<reference ref="109588500"/>
 							<reference ref="83871902"/>
+							<reference ref="692961361"/>
 						</object>
 						<reference key="parent" ref="683436343"/>
 					</object>
@@ -10201,9 +10266,9 @@ AAAAAAAAA</bytes>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{509, 198}, {335, 463}}</string>
+					<string>{{392, 63}, {335, 463}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{509, 198}, {335, 463}}</string>
+					<string>{{392, 63}, {335, 463}}</string>
 					<integer value="1"/>
 					<integer value="1"/>
 					<string>{{345, 496}, {332, 398}}</string>
@@ -10215,7 +10280,7 @@ AAAAAAAAA</bytes>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{621, 743}, {194, 93}}</string>
+					<string>{{611, 743}, {194, 93}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{{590, 842}, {197, 93}}</string>
@@ -10237,7 +10302,7 @@ AAAAAAAAA</bytes>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{351, 836}, {465, 20}}</string>
+					<string>{{341, 836}, {465, 20}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{{191, 576}, {402, 20}}</string>
@@ -10405,7 +10470,7 @@ AAAAAAAAA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{509, 613}, {245, 223}}</string>
+					<string>{{499, 613}, {245, 223}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<string>{{393, 413}, {248, 163}}</string>
@@ -10560,7 +10625,7 @@ AAAAAAAAA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{741, 733}, {235, 103}}</string>
+					<string>{{731, 733}, {235, 103}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -10653,7 +10718,7 @@ AAAAAAAAA</bytes>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{363, 603}, {287, 233}}</string>
+					<string>{{353, 493}, {399, 343}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
 					<integer value="1"/>
@@ -10756,9 +10821,9 @@ AAAAAAAAA</bytes>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>{{579, 631}, {451, 272}}</string>
+					<string>{{578, 484}, {451, 272}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{579, 631}, {451, 272}}</string>
+					<string>{{578, 484}, {451, 272}}</string>
 					<integer value="1"/>
 					<boolean value="NO"/>
 					<integer value="1"/>
@@ -10804,7 +10869,7 @@ AAAAAAAAA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">3885</int>
+			<int key="maxID">3895</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -11081,11 +11146,13 @@ AAAAAAAAA</bytes>
 							<bool key="EncodedWithXMLCoder">YES</bool>
 							<string>CloseSignIn:</string>
 							<string>OpenSignIn:</string>
+							<string>logoutButtonClicked:</string>
 							<string>newSignInButtonClicked:</string>
 							<string>retryLoadingPage:</string>
 						</object>
 						<object class="NSMutableArray" key="dict.values">
 							<bool key="EncodedWithXMLCoder">YES</bool>
+							<string>id</string>
 							<string>id</string>
 							<string>id</string>
 							<string>id</string>

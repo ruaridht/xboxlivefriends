@@ -20,6 +20,10 @@
 	NSString *tempPoints = [accSource cropFrom:@"<h2>Microsoft Points Balance</h2>" to:@"<img"];
 	tempPoints = [MQFunctions flattenHTML:tempPoints];
 	
+	if ([tempPoints contains:@"No"]) {
+		tempPoints = @"0";
+	}
+	
 	return tempPoints;
 }
 

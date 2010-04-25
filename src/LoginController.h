@@ -27,11 +27,16 @@
 
 	NSString *currentMode;
 	NSString *friendsListSource1;
+	
+	BOOL signingOut;
 
 }
 
 - (IBAction)newSignInButtonClicked:(id)sender;
 - (BOOL)loginToPassportWithEmail:(NSString *)emailAddress password:(NSString *)loginPass;
+
+- (IBAction)logoutButtonClicked:(id)sender;
+- (BOOL)logoutOfPassport;
 
 - (IBAction)OpenSignIn:(id)sender;
 - (IBAction)CloseSignIn:(id)sender;

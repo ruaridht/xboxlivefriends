@@ -41,10 +41,12 @@
 
 
 - (void)displayAccountInfo:(NSString *)gamertag {
+	
 	NSArray *theInfo = [XBGamesPlayedParser fetchForSelf];
 	
-	NSLog(@"retrieved games");
+	
 	if (theInfo) {
+		NSLog(@"retrieved games");
 		[self displayPieChart:theInfo];
 	}
 	else {

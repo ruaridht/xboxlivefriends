@@ -5,6 +5,7 @@
 //  Created by Ruaridh Thomson on 21/04/2010.
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
+//  Since all views are subclassed from here, this would be a fitting place to store parsed information.
 
 #import "AITabController.h"
 #import "Controller.h"
@@ -19,6 +20,8 @@
 		return nil;
 	
 	[[Controller stayArounds] addObject:self];
+	
+	gamelistArray = nil;
 	
 	[self setErrorForTab:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notifiedToLoad:) name:[self notificationName] object:nil];

@@ -61,8 +61,8 @@ NSString* signInURL = @"http://live.xbox.com/en-US/profile/Friends.aspx";
 	//[self performSelectorOnMainThread:@selector(OpenSignIn:) withObject:nil waitUntilDone:NO];
 }
 
-- (IBAction)newSignInButtonClicked:(id)sender {
-	
+- (IBAction)newSignInButtonClicked:(id)sender 
+{
 	if (![[email stringValue] contains:@"@"] || [[password stringValue] isEqualToString:@""]) {
 		NSBeep();
 		return;
@@ -94,6 +94,22 @@ NSString* signInURL = @"http://live.xbox.com/en-US/profile/Friends.aspx";
 
 }
 
+- (IBAction)logoutButtonClicked:(id)sender
+{	
+	/*
+	[[webView mainFrame] loadHTMLString:formSource baseURL:[NSURL URLWithString:@"http://login.live.com/pp750/"]];
+	[[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:SIGN_OUT_URL]]];
+	 */
+}
+
+- (BOOL)logoutOfPassport
+{
+	BOOL success = YES;
+	
+	
+	
+	return success;
+}
 
 - (IBAction)OpenSignIn:(id)sender{
 	currentMode = @"loadingSignIn";
@@ -165,6 +181,7 @@ NSString* signInURL = @"http://live.xbox.com/en-US/profile/Friends.aspx";
 		[self doneWithSignIn];
 		//[self loadURL:[NSURL URLWithString:signInURL]];
 	} else {
+		
 		[self loginToPassportWithEmail:[email stringValue] password:[password stringValue]];
 		/*
 		NSLog(@"%@", currentMode);
