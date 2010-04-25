@@ -86,6 +86,7 @@
 - (IBAction)contextualBungieNetProfile:(id)sender;
 
 - (IBAction)openURLMindquirk:(id)sender;
+- (IBAction)openURLLifeUpNorth:(id)sender;
 - (IBAction)openURLDonate:(id)sender;
 - (IBAction)openURLEmailUs:(id)sender;
 

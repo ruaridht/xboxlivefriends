@@ -7,7 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
-
+#import <WebKit/WebKit.h>
 
 @interface ProfileEditor : NSObject {
 	
@@ -21,13 +21,18 @@
 	IBOutlet NSButton *saveButton;
 	IBOutlet NSButton *cancelButton;
 	
+	IBOutlet WebView *editProfileWebView;
+	
 	NSString *prevName;
 	NSString *prevMotto;
 	NSString *prevBio;
 	NSString *prevLocation;
+	
+	NSString *editProfileSource;
 }
 
 - (void)fetchCurrentProfileInfo;
+- (void)fetchCurrentProfileInfoThreaded;
 
 - (IBAction)openEditProfile:(id)sender;
 - (IBAction)saveEditedProfile:(id)sender;

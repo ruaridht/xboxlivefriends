@@ -551,6 +551,10 @@ static BOOL loadThreaded = true;
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://mindquirk.com"]];
 }
 
+- (IBAction)openURLLifeUpNorth:(id)sender{
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://lifeupnorth.co.uk"]];
+}
+
 - (IBAction)openURLDonate:(id)sender{
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"http://mindquirk.com/donate"]];
 }

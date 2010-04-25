@@ -58,6 +58,8 @@ NSString* theSource;
 		if ([LoginController isLoggedIn]) {
 			NSLog(@"User is logged in, they must have no friends!");
 			[noFriends addObject:[XBFriend friendWithTag:@"No Friends" tileURLString:@"http://live.xbox.com/xweb/lib/images/QuestionMark32x32.jpg" statusString:@"Offline" infoString:@"Playing Real Lifeª"]];
+		} else {
+			[[NSNotificationCenter defaultCenter] postNotificationName:@"FriendsListConnectionError" object:nil];
 		}
 		return noFriends;
 	}

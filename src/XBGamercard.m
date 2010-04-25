@@ -136,11 +136,6 @@
 	NSString *repStarsURL = [NSString stringWithFormat:@"http://live.xbox.com/xweb/lib/images/MyXbox/repstars%@.png", repNumerator];
 	repStars = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:repStarsURL]];
 	
-	/*
-	bio = [editProfileSource cropFrom:@"class=\"XbcPersonalProfile\">" to:@"</textarea>"];
-	location = [editProfileSource cropFrom:@"ctl00$MainContent$personalProfile$ctl01$txtLocation\" type=\"text\" value=\"" to:@"\""];
-	realName = [editProfileSource cropFrom:@"\"ctl00$MainContent$personalProfile$ctl01$txtName\" type=\"text\" value=\"" to:@"\""];
-	*/
 	bio = @"";
 	location = @"";
 	realName = @"";
