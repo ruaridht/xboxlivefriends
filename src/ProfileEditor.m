@@ -20,6 +20,8 @@
 		return nil;
 	}
 	
+	lockEditProfile = nil;
+	
 	return self;
 }
 
@@ -80,6 +82,14 @@
 	[editBio setEnabled:NO];
 	[editLocation setEnabled:NO];
 	[editMotto setEnabled:NO];
+	
+	[editProfileButton setEnabled:NO];
+	lockEditProfile = [NSTimer scheduledTimerWithTimeInterval:20.0 target:self selector:@selector(unlockEditProfile) userInfo:nil repeats:NO];
+}
+
+- (void)unlockEditProfile
+{
+	[editProfileButton setEnabled:YES];
 }
 
 - (IBAction)openEditProfile:(id)sender

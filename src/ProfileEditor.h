@@ -18,6 +18,7 @@
 	IBOutlet NSTextField *editBio;
 	IBOutlet NSTextField *editLocation;
 	
+	IBOutlet NSButton *editProfileButton;
 	IBOutlet NSButton *saveButton;
 	IBOutlet NSButton *cancelButton;
 	
@@ -29,10 +30,14 @@
 	NSString *prevLocation;
 	
 	NSString *editProfileSource;
+	
+	NSTimer *lockEditProfile;
 }
 
 - (void)fetchCurrentProfileInfo;
 - (void)fetchCurrentProfileInfoThreaded;
+
+- (void)unlockEditProfile;
 
 - (IBAction)openEditProfile:(id)sender;
 - (IBAction)saveEditedProfile:(id)sender;

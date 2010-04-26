@@ -23,8 +23,7 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="5"/>
-			<integer value="322"/>
+			<integer value="4"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1126,7 +1125,7 @@ AAAAAAAABhAAAJxoAAAAAMIRDgAAAAAAAAAAAAAAAAAAAAAAA</bytes>
 				<nil key="NSViewClass"/>
 				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
 				<object class="NSView" key="NSWindowView" id="994313421">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1490,7 +1489,6 @@ AAAAAAAABhAAAJxoAAAAAMIRDgAAAAAAAAAAAAAAAAAAAAAAA</bytes>
 						</object>
 					</object>
 					<string key="NSFrameSize">{460, 249}</string>
-					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{3.40282e+38, 3.40282e+38}</string>
@@ -1505,7 +1503,7 @@ AAAAAAAABhAAAJxoAAAAAMIRDgAAAAAAAAAAAAAAAAAAAAAAA</bytes>
 				<nil key="NSViewClass"/>
 				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
 				<object class="NSView" key="NSWindowView" id="643454393">
-					<reference key="NSNextResponder"/>
+					<nil key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1535,7 +1533,6 @@ AAAAAAAABhAAAJxoAAAAAMIRDgAAAAAAAAAAAAAAAAAAAAAAA</bytes>
 							</object>
 							<string key="NSFrame">{{20, 20}, {440, 230}}</string>
 							<reference key="NSSuperview" ref="643454393"/>
-							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView"/>
 							<string key="FrameName"/>
 							<string key="GroupName"/>
@@ -1562,8 +1559,6 @@ AAAAAAAABhAAAJxoAAAAAMIRDgAAAAAAAAAAAAAAAAAAAAAAA</bytes>
 						</object>
 					</object>
 					<string key="NSFrameSize">{480, 270}</string>
-					<reference key="NSSuperview"/>
-					<reference key="NSWindow"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{3.40282e+38, 3.40282e+38}</string>
@@ -4355,6 +4350,14 @@ AAAAAAAABhAAAJxoAAAAAMIRDgAAAAAAAAAAAAAAAAAAAAAAA</bytes>
 					</object>
 					<int key="connectionID">381</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">editProfileButton</string>
+						<reference key="source" ref="1053774054"/>
+						<reference key="destination" ref="547059286"/>
+					</object>
+					<int key="connectionID">382</int>
+				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<object class="NSArray" key="orderedObjects">
@@ -6980,9 +6983,9 @@ AAAAAAAABhAAAJxoAAAAAMIRDgAAAAAAAAAAAAAAAAAAAAAAA</bytes>
 					<boolean value="YES"/>
 					<string>{288, 93}</string>
 					<string>{213, 93}</string>
-					<string>{{370, 391}, {596, 465}}</string>
+					<string>{{500, 62}, {596, 465}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{370, 391}, {596, 465}}</string>
+					<string>{{500, 62}, {596, 465}}</string>
 					<integer value="1"/>
 					<integer value="0"/>
 					<string>{{366, 412}, {613, 361}}</string>
@@ -7112,7 +7115,7 @@ AAAAAAAABhAAAJxoAAAAAMIRDgAAAAAAAAAAAAAAAAAAAAAAA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">381</int>
+			<int key="maxID">382</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -7421,6 +7424,7 @@ AAAAAAAABhAAAJxoAAAAAMIRDgAAAAAAAAAAAAAAAAAAAAAAA</bytes>
 							<string>editMotto</string>
 							<string>editName</string>
 							<string>editPanel</string>
+							<string>editProfileButton</string>
 							<string>editProfileWebView</string>
 							<string>saveButton</string>
 						</object>
@@ -7432,6 +7436,7 @@ AAAAAAAABhAAAJxoAAAAAMIRDgAAAAAAAAAAAAAAAAAAAAAAA</bytes>
 							<string>NSTextField</string>
 							<string>NSTextField</string>
 							<string>NSPanel</string>
+							<string>NSButton</string>
 							<string>WebView</string>
 							<string>NSButton</string>
 						</object>

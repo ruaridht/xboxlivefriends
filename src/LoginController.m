@@ -45,7 +45,6 @@ NSString* signInURL = @"http://live.xbox.com/en-US/profile/Friends.aspx";
 	// The first time we open the app, a new keychain will be created to save our password.
 	if (keychainItem) {
 		[password setStringValue:keychainItem.password];
-		NSLog(@"%@", keychainItem.username);
 	} else {
 		[EMGenericKeychainItem addGenericKeychainItemForService:@"XboxLiveFriends" withUsername:@"XboxLive" password:@"nopass"];
 		NSLog(@"Creating Keychain item");
