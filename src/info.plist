@@ -28,9 +28,7 @@
 	<string>XLF</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
-	<key>_SUFeedURL</key>
-	<string>http://mindquirk.com/sparkle/xlf.xml</string>
 	<key>SUFeedURL</key>
-	<string>http://lifeupnorth.co.uk/zensite/sparkle/xlf.xml</string>
+	<string>http://mindquirk.com/sparkle/xlf.xml</string>
 </dict>
 </plist>

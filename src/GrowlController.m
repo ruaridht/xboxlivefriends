@@ -41,7 +41,9 @@
 }
 
 - (void)growlWithNotification:(NSNotification *)notification {
-	[self notifyWithDictionary:[notification object]];
+	if ([growlEnabled state]) {
+		[self notifyWithDictionary:[notification object]];
+	}
 }
 
 

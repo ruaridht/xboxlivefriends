@@ -60,7 +60,7 @@
 
 - (void)fetchCurrentProfileInfoThreaded
 {
-	// NOTE: This is the way we will execute our login and logout.
+	// Note: This is a possibly more efficient way of logging in and out.
 	
 	editProfileSource = [NSString stringWithContentsOfURL:[NSURL URLWithString:EDIT_PROFILE_URL] encoding:NSUTF8StringEncoding error:nil];
 	

@@ -11,7 +11,7 @@
 
 
 @interface GrowlController : NSObject <GrowlApplicationBridgeDelegate>  {
-
+	IBOutlet NSButton *growlEnabled;
 }
 
 - (void)notifyWithDictionary:(NSDictionary *)dick;

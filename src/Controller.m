@@ -38,7 +38,7 @@ StayAround *stayArounds;
 	
 	refreshTimer = nil;
 		
-	[[GrowlController alloc] init];
+	//[[GrowlController alloc] init];
 	
 	queue = [[NSOperationQueue alloc] init];
 	
