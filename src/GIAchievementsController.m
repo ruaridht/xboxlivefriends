@@ -25,7 +25,8 @@
 	[comparisonWebView setShouldCloseWithWindow:NO];
 }
 
-- (void)displayGamerInfo:(NSString *)gamertag {
+- (void)displayGamerInfo:(NSString *)gamertag 
+{
 	NSArray *gamesPlayed = [XBGamesPlayedParser fetchWithTag:gamertag];
 	if (gamesPlayed) {
 		[self setLastFetch:gamesPlayed];
@@ -43,7 +44,6 @@
 	[[comparisonWebView mainFrame] loadHTMLString:@"" baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]]];
 }
 
-
 - (IBAction)refilter:(id)sender
 {
 	[self displayGamesPlayed:[self lastFetch] forGamertag:[self lastFetchTag]];
@@ -56,10 +56,6 @@
 
 - (void)displayGamesPlayed:(NSArray *)gamesList forGamertag:(NSString *)gamertag
 {
-	
-
-
-	
 	NSString *theRow = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/compare_row.htm"] encoding:NSMacOSRomanStringEncoding error:NULL];
 	NSString *theBody = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/compare_body.htm"] encoding:NSMacOSRomanStringEncoding error:NULL];
 	NSString *allRows = @"<!-- something something -->";
@@ -262,7 +258,7 @@
 
 	[theBodyMut replaceOccurrencesOfString:@"$their_tag" withString:gamertag options:0 range:NSMakeRange(0, [theBodyMut length])];
 	[theBodyMut replaceOccurrencesOfString:@"$games_list" withString:allRows options:0 range:NSMakeRange(0, [theBodyMut length])];
-		
+	
 	[[comparisonWebView mainFrame] loadHTMLString:theBodyMut baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]]];
 }
 

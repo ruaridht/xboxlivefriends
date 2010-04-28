@@ -171,6 +171,7 @@
 		552129311180D7EC007E979C /* achievement_row_self.htm in Resources */ = {isa = PBXBuildFile; fileRef = 5521292F1180D7EC007E979C /* achievement_row_self.htm */; };
 		55395673117E56B7000F5530 /* error-bang.gif in Resources */ = {isa = PBXBuildFile; fileRef = 55395672117E56B7000F5530 /* error-bang.gif */; };
 		5545F3091182F4C600BE55F9 /* ProfileEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5545F3081182F4C600BE55F9 /* ProfileEditor.m */; };
+		5556DABD118799E500546CF1 /* LogoutController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5556DABC118799E500546CF1 /* LogoutController.m */; };
 		5566701211825F8D003D4A3E /* account_tab.png in Resources */ = {isa = PBXBuildFile; fileRef = 5566701111825F8D003D4A3E /* account_tab.png */; };
 		55667020118260FC003D4A3E /* AIAccountSummaryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5566701F118260FC003D4A3E /* AIAccountSummaryController.m */; };
 		5566705A11826BA3003D4A3E /* error_exclamation.png in Resources */ = {isa = PBXBuildFile; fileRef = 5566705811826BA3003D4A3E /* error_exclamation.png */; };
@@ -428,6 +429,8 @@
 		55395672117E56B7000F5530 /* error-bang.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "error-bang.gif"; sourceTree = "<group>"; };
 		5545F3071182F4C600BE55F9 /* ProfileEditor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileEditor.h; sourceTree = "<group>"; };
 		5545F3081182F4C600BE55F9 /* ProfileEditor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileEditor.m; sourceTree = "<group>"; };
+		5556DABB118799E500546CF1 /* LogoutController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoutController.h; sourceTree = "<group>"; };
+		5556DABC118799E500546CF1 /* LogoutController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoutController.m; sourceTree = "<group>"; };
 		5566701111825F8D003D4A3E /* account_tab.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = account_tab.png; sourceTree = "<group>"; };
 		5566701E118260FC003D4A3E /* AIAccountSummaryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AIAccountSummaryController.h; sourceTree = "<group>"; };
 		5566701F118260FC003D4A3E /* AIAccountSummaryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIAccountSummaryController.m; sourceTree = "<group>"; };
@@ -727,6 +730,8 @@
 			children = (
 				3BC07C170CE93E8C00B50CA0 /* LoginController.h */,
 				3BC07C180CE93E8C00B50CA0 /* LoginController.m */,
+				5556DABB118799E500546CF1 /* LogoutController.h */,
+				5556DABC118799E500546CF1 /* LogoutController.m */,
 				3B294A7E0A8800BE006365E1 /* HTML Views */,
 			);
 			name = Login;
@@ -1287,6 +1292,7 @@
 				55F170A91181F7A90027D69E /* RecentlyPlayedParser.m in Sources */,
 				55667020118260FC003D4A3E /* AIAccountSummaryController.m in Sources */,
 				5545F3091182F4C600BE55F9 /* ProfileEditor.m in Sources */,
+				5556DABD118799E500546CF1 /* LogoutController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

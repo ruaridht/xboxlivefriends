@@ -76,8 +76,15 @@ NSString* signInURL = @"http://live.xbox.com/en-US/profile/Friends.aspx";
 	
 	currentMode = @"signInFormSubmitted";
 	
+	/*
+	if ([self isSignedIn]) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"LogOutOfLive" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeFriendsListMode" object:@"loading"];
+		return;
+	}
+	*/
+	
 	[self loadURL:[NSURL URLWithString:FRIENDS_PAGE]];
-	//[self loginToPassportWithEmail:[email stringValue] password:[password stringValue]];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeFriendsListMode" object:@"loading"];
 }
 
@@ -89,16 +96,14 @@ NSString* signInURL = @"http://live.xbox.com/en-US/profile/Friends.aspx";
 
 	[[webView windowScriptObject] evaluateWebScript:script];
 	
+	
 	return YES;
 
 }
 
 - (IBAction)logoutButtonClicked:(id)sender
 {	
-	/*
-	[[webView mainFrame] loadHTMLString:formSource baseURL:[NSURL URLWithString:@"http://login.live.com/pp750/"]];
-	[[webView mainFrame] loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:SIGN_OUT_URL]]];
-	 */
+	
 }
 
 - (BOOL)logoutOfPassport
@@ -113,7 +118,7 @@ NSString* signInURL = @"http://live.xbox.com/en-US/profile/Friends.aspx";
 - (IBAction)OpenSignIn:(id)sender{
 	currentMode = @"loadingSignIn";
 	[[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"InSignInMode"];
-	[self performSelectorOnMainThread:@selector(loadURL:) withObject:[NSURL URLWithString:signInURL] waitUntilDone:YES];
+	//[self performSelectorOnMainThread:@selector(loadURL:) withObject:[NSURL URLWithString:signInURL] waitUntilDone:YES];
 
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeFriendsListMode" object:@"sign_in"];
 
@@ -247,15 +252,21 @@ NSString* signInURL = @"http://live.xbox.com/en-US/profile/Friends.aspx";
 		NSLog(@"We are signed in");
 		return YES;
 	}
-	/*
-	 if ([loginSource contains:@"Sign out"]) {
-	 NSLog(@"We Are signed in");
-	 return YES;
-	 }
-	 */
+
 	NSLog(@"We are not signed in");
 	return NO;
-
+	
+	// This may be a more efficient way of checking if we're signed in.  If we aren't, the contents of the SHELLGAMERCARD are nil.
+	/*
+	NSString *loginSource = [NSString stringWithContentsOfURL:[NSURL URLWithString:SHELLGAMERCARD] encoding:NSUTF8StringEncoding error:nil];
+	
+	if ([loginSource rangeOfString:@"alt="Gamerscore""].location != NSNotFound) {
+		NSLog(@"We are signed in");
+		return YES;
+	}
+	 */
+	
+	// OLD SIGNED IN CHECK
 	/*
 	NSString *webViewSource;
 	WebDataSource *dataSource = [[webView mainFrame] dataSource];
@@ -297,7 +308,7 @@ NSString* signInURL = @"http://live.xbox.com/en-US/profile/Friends.aspx";
 - (void)doneWithSignIn {
 	NSLog(@"doneWithSignIn");
 	currentMode = nil;
-	[signInWindow close];
+	//[signInWindow close];
 	
 	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"InSignInMode"];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"InitialSignIn" object:nil];
