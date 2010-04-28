@@ -5,6 +5,7 @@
 #include "MQFunctions.h"
 #import "NSString+Crop.h"
 #import "EMKeychainItem.h"
+#import "NSTextFieldFormatter.h"
 
 //CustomViews
 #include "XBReputationView.h"

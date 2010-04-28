@@ -176,6 +176,7 @@
 		55667020118260FC003D4A3E /* AIAccountSummaryController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5566701F118260FC003D4A3E /* AIAccountSummaryController.m */; };
 		5566705A11826BA3003D4A3E /* error_exclamation.png in Resources */ = {isa = PBXBuildFile; fileRef = 5566705811826BA3003D4A3E /* error_exclamation.png */; };
 		5566705B11826BA3003D4A3E /* success_checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 5566705911826BA3003D4A3E /* success_checkmark.png */; };
+		556A9219118847D3004A3803 /* NSTextFieldFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 556A9218118847D3004A3803 /* NSTextFieldFormatter.m */; };
 		55791CAF117DEC3F009FECBB /* GIFriendsOfGamerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55791CAE117DEC3F009FECBB /* GIFriendsOfGamerController.m */; };
 		55910544117B4EAA0012E9E5 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55910543117B4EAA0012E9E5 /* QuickLook.framework */; };
 		55994DD4117F7BA9006706D6 /* XBAccountInfoController.m in Sources */ = {isa = PBXBuildFile; fileRef = 55994DD3117F7BA9006706D6 /* XBAccountInfoController.m */; };
@@ -436,6 +437,8 @@
 		5566701F118260FC003D4A3E /* AIAccountSummaryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AIAccountSummaryController.m; sourceTree = "<group>"; };
 		5566705811826BA3003D4A3E /* error_exclamation.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error_exclamation.png; sourceTree = "<group>"; };
 		5566705911826BA3003D4A3E /* success_checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = success_checkmark.png; sourceTree = "<group>"; };
+		556A9217118847D3004A3803 /* NSTextFieldFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NSTextFieldFormatter.h; sourceTree = "<group>"; };
+		556A9218118847D3004A3803 /* NSTextFieldFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSTextFieldFormatter.m; sourceTree = "<group>"; };
 		55791CAD117DEC3F009FECBB /* GIFriendsOfGamerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GIFriendsOfGamerController.h; sourceTree = "<group>"; };
 		55791CAE117DEC3F009FECBB /* GIFriendsOfGamerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GIFriendsOfGamerController.m; sourceTree = "<group>"; };
 		55910543117B4EAA0012E9E5 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
@@ -501,6 +504,8 @@
 				3BE062FA0E05D461003F5824 /* NSString+Crop.m */,
 				3B89B67A0DCCF7A4008ED8FA /* DefaultWebViewDelegate.h */,
 				3B89B67B0DCCF7A4008ED8FA /* DefaultWebViewDelegate.m */,
+				556A9217118847D3004A3803 /* NSTextFieldFormatter.h */,
+				556A9218118847D3004A3803 /* NSTextFieldFormatter.m */,
 			);
 			name = "Multipurpose Classes";
 			sourceTree = "<group>";
@@ -1293,6 +1298,7 @@
 				55667020118260FC003D4A3E /* AIAccountSummaryController.m in Sources */,
 				5545F3091182F4C600BE55F9 /* ProfileEditor.m in Sources */,
 				5556DABD118799E500546CF1 /* LogoutController.m in Sources */,
+				556A9219118847D3004A3803 /* NSTextFieldFormatter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,7 +7,7 @@
 //
 
 #import "ProfileEditor.h"
-#import "MQFunctions.h"
+#import "Xbox Live Friends.h"
 #include <WebKit/WebKit.h>
 
 #define EDIT_PROFILE_URL @"https://live.xbox.com/en-US/signup/UIPStartPage.aspx?appid=xboxcom_gamerCard"
@@ -27,7 +27,21 @@
 
 - (void)awakeFromNib
 {
+	NSTextFieldFormatter *mottoFormatter = [[NSTextFieldFormatter alloc] init];
+	[mottoFormatter setMaximumLength:21];
+	[editMotto setFormatter:mottoFormatter];
 	
+	NSTextFieldFormatter *locationFormatter = [[NSTextFieldFormatter alloc] init];
+	[locationFormatter setMaximumLength:40];
+	[editLocation setFormatter:locationFormatter];
+	
+	NSTextFieldFormatter *nameFormatter = [[NSTextFieldFormatter alloc] init];
+	[nameFormatter setMaximumLength:129];
+	[editName setFormatter:nameFormatter];
+	
+	NSTextFieldFormatter *bioFormatter = [[NSTextFieldFormatter alloc] init];
+	[bioFormatter setMaximumLength:499];
+	[editBio setFormatter:bioFormatter];
 }
 
 - (void)fetchCurrentProfileInfo
