@@ -13,6 +13,7 @@
 #include "FriendsListParser.h"
 #include "FriendStatusCell.h"
 #include "LoginController.h"
+#import "StatusItemView.h"
 
 #define SHELLGAMERCARD @"http://live.xbox.com/ShellGamercardV2.ashx"
 
@@ -27,6 +28,7 @@ static BOOL loadThreaded = true;
 		return nil;
 
 	tableViewItems = [[NSMutableArray alloc] init];
+	friendsOnline = [[NSMutableArray alloc] init];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(friendsListNeedsRefresh:) name:@"FriendsListNeedsRefresh" object:nil];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(friendsListNeedsRedraw:) name:@"FriendsListNeedsRedraw" object:nil];
@@ -57,7 +59,11 @@ static BOOL loadThreaded = true;
 	FriendStatusCell *statusCell = [[FriendStatusCell alloc] init];
 	[statusCell setControlView:friendsTable];
 	[[friendsTable tableColumnWithIdentifier:@"gt_and_status"] setDataCell:statusCell];
+}
 
+- (void)dealloc
+{
+	[super dealloc];
 }
 
 - (void)firstFriendsListLoad:(NSNotification *)notification {
@@ -70,6 +76,7 @@ static BOOL loadThreaded = true;
 	if ([self downloadFriendsList]) {
 		[self displayFriendsList];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"FirstFriendsLoaded" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"StatusMenuChangeStatus" object:@"You Are Online"];
 	}
 }
 
@@ -255,11 +262,16 @@ static BOOL loadThreaded = true;
 - (void)displayFriendsList {
 	NSLog(@"displayFriendsList");
 	[tableViewItems removeAllObjects];
+	[friendsOnline removeAllObjects];
 	for (XBFriend *currentFriend in friends) {
 		[tableViewItems addObject:[currentFriend tableViewRecord]];
+		
+		if ([[currentFriend status] isNotEqualTo:@"Offline"]){
+			[friendsOnline addObject:currentFriend];
+		}
 	}
 	[friendsTable reloadData];
-	
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"StatusMenuDisplayFriendsList" object:friendsOnline];
 }
 
 - (void)displayFriendsListThread {
@@ -389,9 +401,23 @@ static BOOL loadThreaded = true;
 	[deleteFriendMenu setEnabled:isEnabled];
 }
 
+- (IBAction)forceWindowToFront:(id)sender
+{
+	// For some reason makeKeyAndOrderFront doesn't work as I would hope
+	[friendsListWindow orderFrontRegardless];
+	[friendsListWindow makeKeyWindow];
+}
+
 #pragma mark -
 #pragma mark TableView Methods
 
+// May add a hover functionality later
+/*
+- (NSString *)tableView:(NSTableView *)aTableView toolTipForCell: (NSCell *)aCell rect:(NSRectPointer)rect tableColumn:(NSTableColumn *) aTableColumn row:(int)row mouseLocation:(NSPoint)mouseLocation
+{
+	return @"Hovering";
+}
+*/
 
 - (int)numberOfRowsInTableView:(NSTableView *)aTableView
 {
@@ -499,13 +525,15 @@ static BOOL loadThreaded = true;
 			NSMutableString *mutableGamerTag = [[contextInfo objectAtIndex:1] mutableCopy];
 			[mutableGamerTag replaceOccurrencesOfString:@" " withString:@"+" options:0 range:NSMakeRange(0, [mutableGamerTag length])];
 			NSString *theStringURL = [NSString stringWithFormat:@"%@%@", theURLBase, mutableGamerTag];
-			[mutableGamerTag release];
+			// NOTE: Attemp to stop EXEC_BAD_ACCESS
+			//[mutableGamerTag release];
 			//querys xbox.com and gets a response
 			[NSString stringWithContentsOfURL:[NSURL URLWithString:theStringURL] encoding:NSUTF8StringEncoding error:nil];
 			[[NSNotificationCenter defaultCenter] postNotificationName:@"FriendsListNeedsRefresh" object:nil];
 		}
 	}
-	[contextInfo release];
+	// NOTE: Attempt to stop EXEC_BAD_ACCESS
+	//[contextInfo release];
 }
 
 #pragma mark -

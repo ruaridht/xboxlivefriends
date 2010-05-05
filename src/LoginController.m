@@ -86,6 +86,7 @@ NSString* signInURL = @"http://live.xbox.com/en-US/profile/Friends.aspx";
 	
 	[self loadURL:[NSURL URLWithString:FRIENDS_PAGE]];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeFriendsListMode" object:@"loading"];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"StatusMenuChangeStatus" object:@"Signing In"];
 }
 
 - (BOOL)loginToPassportWithEmail:(NSString *)emailAddress password:(NSString *)loginPass {
@@ -151,7 +152,8 @@ NSString* signInURL = @"http://live.xbox.com/en-US/profile/Friends.aspx";
 	[theBodyMut replaceOccurrencesOfString:@"$subtitle" withString:msg options:0 range:NSMakeRange(0, [theBodyMut length])];
 
 	[[webView mainFrame] loadHTMLString:theBodyMut baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]]];
-	[theBodyMut release];
+	// NOTE: Attempt to stop EXEC_BAD_ACCESS
+	//[theBodyMut release];
 }
 
 
@@ -313,6 +315,7 @@ NSString* signInURL = @"http://live.xbox.com/en-US/profile/Friends.aspx";
 	[[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"InSignInMode"];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"InitialSignIn" object:nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"StartRefreshTimer" object:nil];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"StatusMenuChangeStatus" object:@"Signed In"];
 	/*
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"FriendsListNeedsRefresh" object:nil];
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"ShowFriendsList" object:nil];

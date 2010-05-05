@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "MAAttachedWindow.h"
+#import "Xbox Live Friends.h"
 
 @class LoginController;
 
@@ -34,6 +35,9 @@
 	
 	//dock menu
 	IBOutlet NSMenu *dockMenu;
+	
+	//Status Menu
+	NSMutableArray *friendsOnline;
 	
 	//variables
 	NSMutableArray *tableViewItems;
@@ -64,6 +68,7 @@
 - (IBAction)RemoveSelectedFriend:(id)sender;
 - (IBAction)CancelParentSheet:(id)sender;
 - (IBAction)OpenAddFriendPanel:(id)sender;
+- (IBAction)forceWindowToFront:(id)sender;
 
 - (BOOL)selectionShouldChangeInTableView:(NSTableView *)aTableView;
 - (void)deleteButtonEnabled:(BOOL)isEnabled;
@@ -86,7 +91,6 @@
 - (IBAction)contextualBungieNetProfile:(id)sender;
 
 - (IBAction)openURLMindquirk:(id)sender;
-- (IBAction)openURLLifeUpNorth:(id)sender;
 - (IBAction)openURLDonate:(id)sender;
 - (IBAction)openURLEmailUs:(id)sender;
 

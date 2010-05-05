@@ -10,6 +10,8 @@
 #import "Controller.h"
 #import "GrowlController.h"
 #import "LoginController.h"
+#import "StatusItemView.h"
+#import "FriendsListController.h"
 
 StayAround *stayArounds;
 
@@ -43,12 +45,17 @@ StayAround *stayArounds;
 	queue = [[NSOperationQueue alloc] init];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startRefreshTimer) name:@"StartRefreshTimer" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeUnreadMessages:) name:@"StatusMenuUnreadMessages" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(changeStatusMenuStatus:) name:@"StatusMenuChangeStatus" object:nil];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(displayStatusMenuFriendsList:) name:@"StatusMenuDisplayFriendsList" object:nil];
 	 
 	/*
 	if (refreshTimer == nil) {
 		refreshTimer = [NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(timedRefresh) userInfo:nil repeats:YES];
 	}
 	 */
+	
+	tableViewItems = [[NSMutableArray alloc] init];
 
 	return self;
 	
@@ -73,6 +80,19 @@ StayAround *stayArounds;
 		[[debugMenu menu] removeItem:debugMenu];
 	}
 	
+	// Create an NSStatusItem.
+    float width = 25.0;
+    float height = [[NSStatusBar systemStatusBar] thickness];
+    NSRect viewFrame = NSMakeRect(0, 0, width, height);
+    statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:width] retain];
+	[statusItem setView:[[[StatusItemView alloc] initWithFrame:viewFrame controller:self] autorelease]];
+	
+	[statusFriendsOnline setDelegate:self];
+	[statusFriendsOnline setDataSource:self];
+	[statusFriendsOnline setDoubleAction: @selector(doubleAction:)];
+	[statusFriendsOnline setTarget: self];
+	
+	// Set AutoRefresh State in Preferences
 	if ([autoRefresh state]) {
 		[autoRefresh setTitle:@"On"];
 	} else {
@@ -80,6 +100,11 @@ StayAround *stayArounds;
 	}
 }
 
+- (void)dealloc
+{
+	[[NSStatusBar systemStatusBar] removeStatusItem:statusItem];
+	[super dealloc];
+}
 
 #pragma mark -
 #pragma mark Refresh Controls
@@ -140,11 +165,131 @@ StayAround *stayArounds;
 	}
 }
 
+#pragma mark -
+#pragma mark StatusItem
+
+- (void)toggleAttachedWindowAtPoint:(NSPoint)pt
+{
+    // Attach/detach window.
+    if (!statusAttWindow) {
+        statusAttWindow = [[MAAttachedWindow alloc] initWithView:statusView 
+												 attachedToPoint:pt 
+														inWindow:nil 
+														  onSide:MAPositionBottom 
+													  atDistance:1.0];
+		
+		[statusAttWindow setArrowBaseWidth:40.0];
+		[statusAttWindow setArrowHeight:10.0];
+        [statusAttWindow orderFrontRegardless];
+    } else {
+        [statusAttWindow orderOut:self];
+        [statusAttWindow release];
+        statusAttWindow = nil;
+    }    
+}
+
+- (void)toggleStatusMenu
+{
+	[statusItem popUpStatusItemMenu:statusMenu];
+}
+
+- (void)changeNumberOfFriendsOnline:(NSString *)onlineCount
+{
+	NSString *string;
+	
+	if ([onlineCount isEqualToString:@"1"]) {
+		string = [NSString stringWithFormat:@"%@ Friend Online", onlineCount];
+	} else {
+		string = [NSString stringWithFormat:@"%@ Friends Online", onlineCount];
+	}
+	[statusMenuFriends setTitle:string];
+}
+
+- (void)changeUnreadMessages:(NSNotification *)aNotification
+{
+	NSString *string;
+	
+	if ([aNotification object] == 1) {
+		string = [NSString stringWithFormat:@"%i New Message", [aNotification object]];
+	} else {
+		string = [NSString stringWithFormat:@"%i New Messages", [aNotification object]];
+	}
+	[statusMenuMessages setTitle:string];
+}
+
+- (void)changeStatusMenuStatus:(NSNotification *)aNotification
+{
+	[statusMenuStatus setTitle:[aNotification object]];
+}
+
+- (void)displayStatusMenuFriendsList:(NSNotification *)aNotification
+{
+	onlineFriends = [[aNotification object] copy];
+	[tableViewItems removeAllObjects];
+	
+	for (XBFriend *currentFriend in onlineFriends) {
+		NSMutableDictionary *record = [NSMutableDictionary dictionary];
+		[record setObject:[currentFriend gamertag] forKey:@"gamertag"];
+		[tableViewItems addObject:record];
+	}
+	[statusFriendsOnline reloadData];
+	[self changeNumberOfFriendsOnline:[NSString stringWithFormat:@"%i", [onlineFriends count]]];
+	NSString *myGamertag = [FriendsListController myGamertag];
+	[myTag setStringValue:myGamertag];
+}
+
+#pragma mark Status Item TableView Delegates
+
+- (NSString *)tableView:(NSTableView *)aTableView toolTipForCell: (NSCell *)aCell rect:(NSRectPointer)rect tableColumn:(NSTableColumn *) aTableColumn row:(int)row mouseLocation:(NSPoint)mouseLocation
+{
+	XBFriend *currentFriend = [onlineFriends objectAtIndex:row];
+	NSString *friendStatus = [currentFriend info];
+	return friendStatus;
+}
+
+- (int)numberOfRowsInTableView:(NSTableView *)aTableView
+{
+	return [tableViewItems count];
+}
+
+- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(int)rowIndex 
+{
+	return [[tableViewItems objectAtIndex:rowIndex] objectForKey:[aTableColumn identifier]];
+}
+
+
+- (void)tableViewSelectionIsChanging:(NSNotification *)aNotification
+{
+}
+
+- (void)tableViewSelectionDidChange:(NSNotification *)aNotification
+{
+	//[self doRequestPop];
+	int theRow = [statusFriendsOnline selectedRow];
+	if (theRow != -1){
+		//[[NSNotificationCenter defaultCenter] postNotificationName:@"FriendsListSelectionChanged" object:[friends objectAtIndex:theRow]];
+		//[self deleteButtonEnabled:YES];
+	}
+	else{
+		//[[NSNotificationCenter defaultCenter] postNotificationName:@"FriendsListSelectionChanged" object:nil];
+	}
+}
+
+- (BOOL)selectionShouldChangeInTableView:(NSTableView *)aTableView
+{
+	return YES;
+}
+
+- (void)doubleAction:(id)sender
+{
+	// Lookup currently selected gamer?
+	NSString *currentlySelectedTag = [onlineFriends objectAtIndex:[statusFriendsOnline selectedRow]];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"GIRequestLookupWithTag" object:currentlySelectedTag];
+}
+
+- (void)clearTableViewSelection
+{
+	[statusFriendsOnline deselectRow:[statusFriendsOnline selectedRow]];
+}
+
 @end
-
-
-
-
-
-
-

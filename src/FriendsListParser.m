@@ -13,7 +13,6 @@
 
 //NSString* friendsListURL = @"http://live.xbox.com/en-US/profile/Friends.aspx";
 NSString* statusNewlineReplacement = @" - ";
-NSString* theSource;
 
 @implementation FriendsListParser
 
@@ -21,7 +20,7 @@ NSString* theSource;
 
 	NSArray *friendsArray;
 	NSLog(@"Getting friends list HTML");
-	theSource = [NSString stringWithContentsOfURL:[NSURL URLWithString:FRIEND_PAGE] encoding:NSUTF8StringEncoding error:nil];
+	NSString *theSource = [NSString stringWithContentsOfURL:[NSURL URLWithString:FRIEND_PAGE] encoding:NSUTF8StringEncoding error:nil];
 	NSLog(@"Acquired the source");
 
 	//BOOL success = NO;
@@ -52,6 +51,9 @@ NSString* theSource;
 	}
 	*/
 	friendsArray = [self friendsWithSource:theSource];
+	
+	// NOTE: Attempt to solve memory problem
+	
 	if ([friendsArray count] == 0) {
 		NSLog(@"Friends Array could not be built!");
 		NSMutableArray *noFriends = [[NSMutableArray alloc] init];

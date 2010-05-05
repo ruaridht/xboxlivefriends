@@ -130,6 +130,7 @@
 
 	//notify in dock
 	[self badgeDockIconWithNumber:unreadCount];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"StatusMenuUnreadMessages" object:unreadCount];
 
 }
 
@@ -172,7 +173,9 @@
 }
 
 - (IBAction)openMessageCenter:(id)sender {
-	[messageCenterWindow makeKeyAndOrderFront:sender];
+	//[messageCenterWindow makeKeyAndOrderFront:sender];
+	// Incase we're outside XLF, let's force the window to the front of everything!
+	[messageCenterWindow orderFrontRegardless];
 	[self loadMessageCenterThreaded];
 }
 
