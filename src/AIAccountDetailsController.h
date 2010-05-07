@@ -21,4 +21,6 @@
 	IBOutlet XBReputationView *reputation;
 }
 
+- (IBAction)reloadAccountDetails:(id)sender;
+
 @end

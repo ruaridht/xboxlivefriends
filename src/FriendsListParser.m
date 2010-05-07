@@ -10,9 +10,10 @@
 #import "LoginController.h"
 
 #define FRIEND_PAGE @"http://live.xbox.com/en-US/profile/Friends.aspx"
+#define STATUS_NEW_LINE_REPLACEMENT @" - "
 
 //NSString* friendsListURL = @"http://live.xbox.com/en-US/profile/Friends.aspx";
-NSString* statusNewlineReplacement = @" - ";
+//NSString* statusNewlineReplacement = @" - ";
 
 @implementation FriendsListParser
 
@@ -126,7 +127,7 @@ NSString* statusNewlineReplacement = @" - ";
 			richPresence = [richPresence replace:@" playing " with:@"\n"];
 		}
 		richPresence = [richPresence stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-		richPresence = [richPresence replace:@"\n" with:statusNewlineReplacement];
+		richPresence = [richPresence replace:@"\n" with:STATUS_NEW_LINE_REPLACEMENT];
 		richPresence = [richPresence replace:@"   " with:@" "];
 
 

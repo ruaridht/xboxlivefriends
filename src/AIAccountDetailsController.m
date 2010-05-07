@@ -13,6 +13,11 @@
 
 @implementation AIAccountDetailsController
 
+- (void)awakeFromNib
+{
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadAccountDetails:) name:@"AccountInfoReloadAccountDetails" object:nil];
+}
+
 - (NSString *)notificationName
 {
 	return @"AIDetailsLoadNotification";
@@ -35,7 +40,9 @@
 	XBGamercard *gamercard = [XBGamercard cardForSelf];
 	[gamercard retrieveEditProfileDetails];
 	
-	NSString *URLtag = [gamertag replace:@" " with:@"%20"];
+	//NSString *URLtag = [gamertag replace:@" " with:@"%20"];
+	NSString *URLtag = [gamercard gamertag];
+	URLtag = [URLtag replace:@" " with:@"%20"];
 	
 	[bio setStringValue:[gamercard bio]];
 	[location setStringValue:[gamercard location]];
@@ -48,6 +55,12 @@
 	if (avatarImage) {
 		[avatar setImage:avatarImage];
 	}
+}
+
+- (void)reloadAccountDetails:(id)sender
+{
+	NSInvocationOperation* theOp = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(displayAccountInfo:) object:nil];
+	[[[[NSApplication sharedApplication] delegate] operationQueue] addOperation:theOp];
 }
 
 @end

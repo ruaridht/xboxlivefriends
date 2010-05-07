@@ -80,17 +80,30 @@ StayAround *stayArounds;
 		[[debugMenu menu] removeItem:debugMenu];
 	}
 	
-	// Create an NSStatusItem.
-    float width = 25.0;
-    float height = [[NSStatusBar systemStatusBar] thickness];
-    NSRect viewFrame = NSMakeRect(0, 0, width, height);
-    statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:width] retain];
-	[statusItem setView:[[[StatusItemView alloc] initWithFrame:viewFrame controller:self] autorelease]];
+	if ([self shouldBeUIElement]) {
+		[showStatusItem setEnabled:NO];
+	} else {
+		[showStatusItem setEnabled:YES];
+	}
 	
-	[statusFriendsOnline setDelegate:self];
-	[statusFriendsOnline setDataSource:self];
-	[statusFriendsOnline setDoubleAction: @selector(doubleAction:)];
-	[statusFriendsOnline setTarget: self];
+	if ([showStatusItem state]) {
+		[showDockIcon setEnabled:YES];
+		
+		// Create an NSStatusItem.
+		float width = 25.0;
+		float height = [[NSStatusBar systemStatusBar] thickness];
+		NSRect viewFrame = NSMakeRect(0, 0, width, height);
+		statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:width] retain];
+		[statusItem setView:[[[StatusItemView alloc] initWithFrame:viewFrame controller:self] autorelease]];
+	
+		[statusFriendsOnline setDelegate:self];
+		[statusFriendsOnline setDataSource:self];
+		[statusFriendsOnline setDoubleAction: @selector(doubleAction:)];
+		[statusFriendsOnline setTarget: self];
+	} else {
+		[showDockIcon setState:1];
+		[showDockIcon setEnabled:NO];
+	}
 	
 	// Set AutoRefresh State in Preferences
 	if ([autoRefresh state]) {
@@ -220,6 +233,7 @@ StayAround *stayArounds;
 - (void)changeStatusMenuStatus:(NSNotification *)aNotification
 {
 	[statusMenuStatus setTitle:[aNotification object]];
+	[dockMenuStatus setTitle:[aNotification object]];
 }
 
 - (void)displayStatusMenuFriendsList:(NSNotification *)aNotification
@@ -290,6 +304,68 @@ StayAround *stayArounds;
 - (void)clearTableViewSelection
 {
 	[statusFriendsOnline deselectRow:[statusFriendsOnline selectedRow]];
+}
+
+#pragma mark -
+#pragma mark Preferences
+
+- (IBAction)setApplicationIsAgent:(id)sender
+{
+	if ([showDockIcon state]) {
+		NSLog(@"Show Dock Icon");
+		[self setShouldBeUIElement:NO];
+		
+	} else {
+		NSLog(@"Hide Dock Icon");
+		// We don't want the user to be able to hide the dock icon if the status icon is not being displayed.
+		if ([showStatusItem state]){
+			[self setShouldBeUIElement:YES];
+		}
+	}
+}
+		
+- (BOOL)shouldBeUIElement {
+	return [[[[NSBundle mainBundle] infoDictionary] objectForKey:@"LSUIElement"] boolValue];
+}
+
+- (void)setShouldBeUIElement:(BOOL)hidden {
+	NSString * plistPath = nil;
+	NSFileManager *manager = [NSFileManager defaultManager];
+	if (plistPath = [[[NSBundle mainBundle] bundlePath] stringByAppendingPathComponent:@"Contents/Info.plist"]) {
+		if ([manager isWritableFileAtPath:plistPath]) {
+			NSMutableDictionary *infoDict = [NSMutableDictionary dictionaryWithContentsOfFile:plistPath];
+			[infoDict setObject:[NSNumber numberWithBool:hidden] forKey:@"LSUIElement"];
+			[infoDict writeToFile:plistPath atomically:NO];
+			[manager setAttributes:[NSDictionary dictionaryWithObject:[NSDate date] forKey:NSFileModificationDate] ofItemAtPath:[[NSBundle mainBundle] bundlePath] error:nil];
+			//return YES;
+		}
+	}
+	//return NO;
+}
+
+- (IBAction)setHidesStatusItem:(id)sender
+{
+	if ([showStatusItem state]) {
+		[showDockIcon setEnabled:YES];
+		NSLog(@"Show the status Item");
+		
+		float width = 25.0;
+		float height = [[NSStatusBar systemStatusBar] thickness];
+		NSRect viewFrame = NSMakeRect(0, 0, width, height);
+		statusItem = [[[NSStatusBar systemStatusBar] statusItemWithLength:width] retain];
+		[statusItem setView:[[[StatusItemView alloc] initWithFrame:viewFrame controller:self] autorelease]];
+		
+		[statusFriendsOnline setDelegate:self];
+		[statusFriendsOnline setDataSource:self];
+		[statusFriendsOnline setDoubleAction: @selector(doubleAction:)];
+		[statusFriendsOnline setTarget: self];
+		
+	} else {
+		NSLog(@"Hide the status Item");
+		[showDockIcon setState:1];
+		[showDockIcon setEnabled:NO];
+		[[NSStatusBar systemStatusBar] removeStatusItem:statusItem];
+	}
 }
 
 @end

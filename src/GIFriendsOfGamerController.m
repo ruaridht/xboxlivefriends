@@ -83,9 +83,13 @@
 		[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"GIChangeLoadStatus" object:[NSString stringWithFormat:@"Loading friend %i/%i", currentFriendCount, [gamerFriends count]]]];
 		[tableViewItems addObject:[currentFriend tableViewRecord]];
 		currentFriendCount += 1;
+		
+		// As long as this isn't a problem, it might be better for the user
+		// if we reload the table data each time we fetch the friend's tableViewRecord
+		[gamerFriendsTable reloadData];
 	}
 	[friendsCount setStringValue:[NSString stringWithFormat:@"%i Friends", [gamerFriends count]]];
-	[gamerFriendsTable reloadData];
+	//[gamerFriendsTable reloadData];
 	[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"GIPaneDoneLoading" object:nil]];
 	[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"GIChangeLoadStatus" object:@""]];
 }

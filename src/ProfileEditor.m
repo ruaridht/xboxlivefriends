@@ -104,6 +104,7 @@
 - (void)unlockEditProfile
 {
 	[editProfileButton setEnabled:YES];
+	[[NSNotificationCenter defaultCenter] postNotificationName:@"AccountInfoReloadAccountDetails" object:nil];
 }
 
 - (IBAction)openEditProfile:(id)sender

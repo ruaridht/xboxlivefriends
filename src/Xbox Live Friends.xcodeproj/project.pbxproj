@@ -197,6 +197,7 @@
 		55C79A1A1178A5F0006CFA67 /* EMKeychainItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 55C79A191178A5F0006CFA67 /* EMKeychainItem.m */; };
 		55C79A351178A600006CFA67 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C79A341178A600006CFA67 /* Carbon.framework */; };
 		55C79A3A1178A615006CFA67 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C79A391178A615006CFA67 /* Security.framework */; };
+		55DC2F01119372F70013CDA4 /* highlightGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DC2F00119372F70013CDA4 /* highlightGradient.png */; };
 		55F170A91181F7A90027D69E /* RecentlyPlayedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F170A81181F7A90027D69E /* RecentlyPlayedParser.m */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
@@ -472,6 +473,7 @@
 		55C79A191178A5F0006CFA67 /* EMKeychainItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EMKeychainItem.m; sourceTree = "<group>"; };
 		55C79A341178A600006CFA67 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		55C79A391178A615006CFA67 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		55DC2F00119372F70013CDA4 /* highlightGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = highlightGradient.png; sourceTree = "<group>"; };
 		55F170A71181F7A90027D69E /* RecentlyPlayedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentlyPlayedParser.h; sourceTree = "<group>"; };
 		55F170A81181F7A90027D69E /* RecentlyPlayedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentlyPlayedParser.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -853,6 +855,7 @@
 			children = (
 				5527645A119070F300F5789B /* Status Images */,
 				3B463BC60A928CB3004E500D /* Beads */,
+				55DC2F00119372F70013CDA4 /* highlightGradient.png */,
 				3BA852A10DCD6BF300602576 /* toolbar_achievements.png */,
 				55B0C7C91183748F002723BD /* toolbar_account.png */,
 				3BC8E2AC0AF337B400770196 /* defaultfriend.png */,
@@ -1226,6 +1229,7 @@
 				552764611190710F00F5789B /* status_red.png in Resources */,
 				55B0E2E11190D5A900FE46C5 /* status_white.png in Resources */,
 				55B0E3131190D73900FE46C5 /* status_black.png in Resources */,
+				55DC2F01119372F70013CDA4 /* highlightGradient.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1432,7 +1436,6 @@
 				OTHER_LDFLAGS = "-lcrypto";
 				PREBINDING = NO;
 				SDKROOT = macosx10.5;
-				ZERO_LINK = NO;
 			};
 			name = Debug;
 		};

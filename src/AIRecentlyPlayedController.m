@@ -77,12 +77,16 @@
 	[tableViewItems removeAllObjects];
 	int currentGamerCount = 1;
 	for (XBFriend *currentGamer in recentlyPlayed) {
-		[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"AIChangeLoadStatus" object:[NSString stringWithFormat:@"Loading friend %i/%i", currentGamerCount, [recentlyPlayed count]]]];
+		[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"AIChangeLoadStatus" object:[NSString stringWithFormat:@"Loading gamer %i/%i", currentGamerCount, [recentlyPlayed count]]]];
 		[tableViewItems addObject:[currentGamer tableViewRecordWithZone]];
 		currentGamerCount += 1;
+		
+		// As long as this isn't a problem, it might be better for the user
+		// if we reload the table data each time we fetch the gamer's tableViewRecord
+		[recentlyPlayedTable reloadData];
 	}
 	[recentCount setStringValue:[NSString stringWithFormat:@"%i Gamers", [recentlyPlayed count]]];
-	[recentlyPlayedTable reloadData];
+	//[recentlyPlayedTable reloadData];
 	[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"AIPaneDoneLoading" object:nil]];
 	[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"AIChangeLoadStatus" object:@""]];
 }

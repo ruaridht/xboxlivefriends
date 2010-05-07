@@ -38,6 +38,13 @@
 	IBOutlet NSMenuItem *statusMenuFriends;
 	IBOutlet NSMenuItem *statusMenuMessages;
 	IBOutlet NSMenuItem *statusMenuStatus;
+	
+	// Dock Menu Stuff
+	IBOutlet NSMenuItem *dockMenuStatus;
+	
+	// Preferences
+	IBOutlet NSButton *showStatusItem;
+	IBOutlet NSButton *showDockIcon;
 }
 
 + (StayAround *)stayArounds;
@@ -50,5 +57,11 @@
 
 - (void)toggleAttachedWindowAtPoint:(NSPoint)pt;
 - (void)toggleStatusMenu;
+
+- (BOOL)shouldBeUIElement;
+- (void)setShouldBeUIElement:(BOOL)hidden;
+
+- (IBAction)setApplicationIsAgent:(id)sender;
+- (IBAction)setHidesStatusItem:(id)sender;
 
 @end
