@@ -27,6 +27,7 @@
 	IBOutlet NSView *accountInfoDetailsView;
 	IBOutlet NSView *accountInfoRecentlyPlayed;
 	IBOutlet NSView *accountInfoAccSummaryView;
+	IBOutlet NSView *accountInfoPurchaseHistoryView;
 	
 	IBOutlet NSTextField *accountInfoErrorText;
 	

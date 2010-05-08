@@ -71,6 +71,7 @@
 	[records addObject:[self tableViewRecordForTab:@"Screenshots" icon:[NSImage imageNamed:@"tab_halo_screenshot"] view:accountInfoHaloScreenshotsView]];
 	[records addObject:[self tableViewRecordForTab:@" ACCOUNT MGMT" icon:[NSNull null] view:[NSNull null]]];
 	[records addObject:[self tableViewRecordForTab:@"Summary" icon:[NSImage imageNamed:@"account_tab"] view:accountInfoAccSummaryView]];
+	[records addObject:[self tableViewRecordForTab:@"Purchases" icon:[NSImage imageNamed:@"purchases_tab"] view:accountInfoPurchaseHistoryView]];
 	
 	[infoTable reloadData];
 	
