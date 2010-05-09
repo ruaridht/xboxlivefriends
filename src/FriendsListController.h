@@ -42,6 +42,7 @@
 	//variables
 	NSMutableArray *tableViewItems;
 	NSArray *friends;
+	NSArray *oldFriends;
 	//XBFriendsList *friendsListObject;
 	
 	MAAttachedWindow *requestPop;

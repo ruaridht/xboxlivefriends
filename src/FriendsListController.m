@@ -119,7 +119,7 @@ static BOOL loadThreaded = true;
 
 - (BOOL)downloadFriendsList {
 	NSLog(@"downloadFriendsList");
-	NSArray *oldFriends = friends;
+	oldFriends = friends;
 	
 	friends = [FriendsListParser friends];
 	
