@@ -14,7 +14,7 @@
 }
 
 + (NSDictionary *)fetchWithTag:(NSString *)tag;
-+ (NSDictionary *)fetchWithURL:(NSURL *)URL;
++ (NSDictionary *)fetchWithURL:(NSURL *)URL withTag:(NSString *)gamertag;
 
 
 @end

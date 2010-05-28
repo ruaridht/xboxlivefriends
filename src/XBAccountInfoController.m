@@ -179,6 +179,9 @@
 	if ([currentTabName isEqual:@"Summary"]) {
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"AIAccountSummaryLoadNotification" object:currentGamertag];
 	}
+	if ([currentTabName isEqual:@"Purchases"]) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"AIPurchaseHistoryLoadNotification" object:currentGamertag];
+	}
 }
 
 - (void)startSpinner:(NSNotification *)notification

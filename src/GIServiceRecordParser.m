@@ -14,12 +14,12 @@
 
 
 + (NSDictionary *)fetchWithTag:(NSString *)tag {
-	return [self fetchWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", @"http://www.bungie.net/Stats/Halo3/Default.aspx?player=", [tag replace:@" " with:@"+"]]]];
+	return [self fetchWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", @"http://www.bungie.net/Stats/Halo3/Default.aspx?player=", [tag replace:@" " with:@"+"]]] withTag:tag];
 }
 
 
 
-+ (NSDictionary *)fetchWithURL:(NSURL *)URL {
++ (NSDictionary *)fetchWithURL:(NSURL *)URL withTag:(NSString *)gamertag {
 
 	NSString *pageSource = [NSString stringWithContentsOfURL:URL encoding:NSUTF8StringEncoding error:nil];
 
@@ -34,7 +34,7 @@
 	[serviceRecord setObject:xp forKey:@"xp"];
 	[serviceRecord setObject:[pageSource cropFrom:@"ctl00_mainContent_identityStrip_lblSkill\">" to:@"</span>"] forKey:@"skill"];
 	[serviceRecord setObject:[pageSource cropFrom:@"ctl00_mainContent_identityStrip_lblRank\">Global Rank: " to:@"</span>"] forKey:@"rankTitle"];
-	[serviceRecord setObject:[pageSource cropFrom:@"ctl00_mainContent_identityStrip_lblServiceTag\">" to:@"</span>"] forKey:@"serviceTag"];
+	[serviceRecord setObject:[pageSource cropFrom:[NSString stringWithFormat:@"<li><h3>%@ - ", gamertag] to:@"</h3>"] forKey:@"serviceTag"];
 
 	NSString *rankImageArea = [pageSource cropFrom:@"<img id=\"ctl00_mainContent_identityStrip_imgRank\"" to:@"/>"];
 	if (rankImageArea)
@@ -42,7 +42,7 @@
 
 	NSString *nextRankArea = [pageSource cropFrom:@"ctl00_mainContent_identityStrip_hypNextRank" to:@"</li>"];
 	if (nextRankArea)
-		[serviceRecord setObject:[pageSource cropFrom:@"\">" to:@"<"] forKey:@"nextRankAt"];
+		[serviceRecord setObject:[nextRankArea cropFrom:@"\">" to:@"<"] forKey:@"nextRankAt"];
 
 	
 	return [serviceRecord copy];

@@ -60,10 +60,6 @@
 
 - (void)displayGamesPlayed:(NSArray *)gamesList forGamertag:(NSString *)gamertag
 {
-	
-	
-	
-	
 	NSString *theRow = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/game_list_row.htm"] encoding:NSMacOSRomanStringEncoding error:NULL];
 	NSString *theBody = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/game_list_body.htm"] encoding:NSMacOSRomanStringEncoding error:NULL];
 	NSString *allRows = @"<!-- something something -->";
