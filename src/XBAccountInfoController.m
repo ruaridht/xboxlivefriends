@@ -110,7 +110,7 @@
 	[self setCurrentGamertag:[theGamercard gamertag]];
 	[gamertag setStringValue:[theGamercard gamertag]];
 	[gamerscore setStringValue:[theGamercard gamerscore]];
-	[motto setStringValue:[theGamercard motto]];
+	[motto setStringValue:[MQFunctions flattenHTML:[theGamercard motto]]];
 	[tile setImage:[theGamercard gamertileImage]];
 	
 	/*

@@ -174,7 +174,7 @@
 
 - (IBAction)openMessageCenter:(id)sender {
 	[messageCenterWindow makeKeyAndOrderFront:sender];
-	// Incase we're outside XLF, let's force the window to the front of everything!
+	// Incase we're outside XLF, let's force the window to the front of everything.
 	// [messageCenterWindow orderFrontRegardless];
 	[self loadMessageCenterThreaded];
 }

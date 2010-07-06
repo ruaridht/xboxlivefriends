@@ -168,6 +168,10 @@
 		5527645F1190710F00F5789B /* status_green.png in Resources */ = {isa = PBXBuildFile; fileRef = 5527645C1190710F00F5789B /* status_green.png */; };
 		552764601190710F00F5789B /* status_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 5527645D1190710F00F5789B /* status_yellow.png */; };
 		552764611190710F00F5789B /* status_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 5527645E1190710F00F5789B /* status_red.png */; };
+		552DA7B211D64F090046DA78 /* ActivityCenterController.m in Sources */ = {isa = PBXBuildFile; fileRef = 552DA7B111D64F090046DA78 /* ActivityCenterController.m */; };
+		552DA7B711D655780046DA78 /* activityStyle.css in Resources */ = {isa = PBXBuildFile; fileRef = 552DA7B611D655780046DA78 /* activityStyle.css */; };
+		552DA7C411D655820046DA78 /* activity_body.html in Resources */ = {isa = PBXBuildFile; fileRef = 552DA7C211D655820046DA78 /* activity_body.html */; };
+		552DA7C511D655820046DA78 /* activity_row.html in Resources */ = {isa = PBXBuildFile; fileRef = 552DA7C311D655820046DA78 /* activity_row.html */; };
 		5532904C118A3BA900783F08 /* StatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5532904B118A3BA900783F08 /* StatusItemView.m */; };
 		55395673117E56B7000F5530 /* error-bang.gif in Resources */ = {isa = PBXBuildFile; fileRef = 55395672117E56B7000F5530 /* error-bang.gif */; };
 		5545F3091182F4C600BE55F9 /* ProfileEditor.m in Sources */ = {isa = PBXBuildFile; fileRef = 5545F3081182F4C600BE55F9 /* ProfileEditor.m */; };
@@ -433,6 +437,11 @@
 		5527645C1190710F00F5789B /* status_green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_green.png; sourceTree = "<group>"; };
 		5527645D1190710F00F5789B /* status_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_yellow.png; sourceTree = "<group>"; };
 		5527645E1190710F00F5789B /* status_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = status_red.png; sourceTree = "<group>"; };
+		552DA7B011D64F090046DA78 /* ActivityCenterController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityCenterController.h; sourceTree = "<group>"; };
+		552DA7B111D64F090046DA78 /* ActivityCenterController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityCenterController.m; sourceTree = "<group>"; };
+		552DA7B611D655780046DA78 /* activityStyle.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = activityStyle.css; sourceTree = "<group>"; };
+		552DA7C211D655820046DA78 /* activity_body.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = activity_body.html; sourceTree = "<group>"; };
+		552DA7C311D655820046DA78 /* activity_row.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = activity_row.html; sourceTree = "<group>"; };
 		5532904A118A3BA900783F08 /* StatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusItemView.h; sourceTree = "<group>"; };
 		5532904B118A3BA900783F08 /* StatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusItemView.m; sourceTree = "<group>"; };
 		55395672117E56B7000F5530 /* error-bang.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "error-bang.gif"; sourceTree = "<group>"; };
@@ -578,6 +587,7 @@
 				3B8058470CF38FE4000E85D3 /* Login */,
 				3B8058480CF38FFA000E85D3 /* Friends List */,
 				3B00E5C70ABE1F5B00B48E3A /* Message Center */,
+				552DA7AF11D64EEE0046DA78 /* Activity Center */,
 				3BA3ADD80E0E244600ADE992 /* Inspector */,
 				55994DCD117F7AEF006706D6 /* Account Info */,
 				3BF81DAD0CD81BBA00D74991 /* Gamer Info */,
@@ -994,6 +1004,26 @@
 			name = "Status Images";
 			sourceTree = "<group>";
 		};
+		552DA7AF11D64EEE0046DA78 /* Activity Center */ = {
+			isa = PBXGroup;
+			children = (
+				552DA7B011D64F090046DA78 /* ActivityCenterController.h */,
+				552DA7B111D64F090046DA78 /* ActivityCenterController.m */,
+				552DA7B311D653FB0046DA78 /* HTML */,
+			);
+			name = "Activity Center";
+			sourceTree = "<group>";
+		};
+		552DA7B311D653FB0046DA78 /* HTML */ = {
+			isa = PBXGroup;
+			children = (
+				552DA7C211D655820046DA78 /* activity_body.html */,
+				552DA7C311D655820046DA78 /* activity_row.html */,
+				552DA7B611D655780046DA78 /* activityStyle.css */,
+			);
+			name = HTML;
+			sourceTree = "<group>";
+		};
 		5566700C11825F4B003D4A3E /* Account Summary View */ = {
 			isa = PBXGroup;
 			children = (
@@ -1267,6 +1297,9 @@
 				559E960911A9D6DC00F764DE /* purchased_list_body.html in Resources */,
 				559E960B11A9D6E300F764DE /* purchased_list_row.html in Resources */,
 				559E960D11A9D6EA00F764DE /* purchasedStyle.css in Resources */,
+				552DA7B711D655780046DA78 /* activityStyle.css in Resources */,
+				552DA7C411D655820046DA78 /* activity_body.html in Resources */,
+				552DA7C511D655820046DA78 /* activity_row.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1349,6 +1382,7 @@
 				556A9219118847D3004A3803 /* NSTextFieldFormatter.m in Sources */,
 				5532904C118A3BA900783F08 /* StatusItemView.m in Sources */,
 				55C2FDB611A6EA0E005E54A5 /* AIPurchaseHistoryController.m in Sources */,
+				552DA7B211D64F090046DA78 /* ActivityCenterController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

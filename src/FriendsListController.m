@@ -225,7 +225,7 @@ static BOOL loadThreaded = true;
 					[[NSNotificationCenter defaultCenter] postNotificationName:@"GrowlNotify" object:
 					
 					[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:notificationName, notificationTitle, [newFriend info], [[newFriend tileImage] TIFFRepresentation], nil] forKeys:[NSArray arrayWithObjects:@"GROWL_NOTIFICATION_NAME", @"GROWL_NOTIFICATION_TITLE", @"GROWL_NOTIFICATION_DESCRIPTION", @"GROWL_NOTIFICATION_ICON", nil]]
-					
+
 					];
 				}
 				
