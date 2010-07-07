@@ -130,7 +130,7 @@ StayAround *stayArounds;
 		if (timeInt < 30) {
 			timeInt = 30;
 		}
-		refreshTimer = [NSTimer scheduledTimerWithTimeInterval:timeInt target:self selector:@selector(timedRefresh) userInfo:nil repeats:YES];
+		refreshTimer = [NSTimer scheduledTimerWithTimeInterval:timeInt target:self selector:@selector(timedRefreshThreaded) userInfo:nil repeats:YES];
 	}
 }
 
@@ -142,7 +142,7 @@ StayAround *stayArounds;
 		if (timeInt < 30) {
 			timeInt = 30;
 		}
-		refreshTimer = [NSTimer scheduledTimerWithTimeInterval:timeInt target:self selector:@selector(timedRefresh) userInfo:nil repeats:YES];
+		refreshTimer = [NSTimer scheduledTimerWithTimeInterval:timeInt target:self selector:@selector(timedRefreshThreaded) userInfo:nil repeats:YES];
 	} else {
 		// ![autoRefresh state];
 		[autoRefresh setTitle:@"Off"];
@@ -160,7 +160,7 @@ StayAround *stayArounds;
 	if ([autoRefresh state]) {
 		NSLog(@"Refresh is on");
 		[refreshTimer invalidate];
-		refreshTimer = [NSTimer scheduledTimerWithTimeInterval:timeInt target:self selector:@selector(timedRefresh) userInfo:nil repeats:YES];
+		refreshTimer = [NSTimer scheduledTimerWithTimeInterval:timeInt target:self selector:@selector(timedRefreshThreaded) userInfo:nil repeats:YES];
 	}
 }
 
@@ -176,6 +176,12 @@ StayAround *stayArounds;
 	} else {
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"FriendsListConnectionError" object:nil];
 	}
+}
+
+- (void)timedRefreshThreaded
+{
+	NSInvocationOperation* theOp = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(timedRefresh) object:nil];
+	[[[NSApp delegate] operationQueue] addOperation:theOp];
 }
 
 #pragma mark -
