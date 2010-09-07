@@ -45,7 +45,7 @@
 		[self notifyWithDictionary:[notification object]];
 	}
 	
-	[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"ActivityNotify" object:[notification object]]];
+	//[[NSNotificationCenter defaultCenter] postNotification:[NSNotification notificationWithName:@"ActivityNotify" object:[notification object]]];
 }
 
 

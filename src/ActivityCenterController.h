@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import "Xbox Live Friends.h"
+#import <WebKit/WebKit.h>
 
 @interface ActivityCenterController : NSObject {
 	

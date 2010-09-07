@@ -50,11 +50,23 @@
 	if (theRow != -1){
 		XBMessage *msg = [messages objectAtIndex:theRow];
 		if (msg) {
-			[self loadFullMessage:msg];
+			//[self loadFullMessage:msg];
+			
+			// THREAD_ATTEMPT
+			// We want to work with the webView in a separate thread.
+			[NSThread detachNewThreadSelector:@selector(loadFullMessage:)
+									 toTarget:self		// we are the target
+								   withObject:msg];
 		}
 	}
 	else {
-		[self loadFullMessage:nil];
+		//[self loadFullMessage:nil];
+		
+		// THREAD_ATTEMPT
+		// We want to work with the webView in a separate thread.
+		[NSThread detachNewThreadSelector:@selector(loadFullMessage:)
+								 toTarget:self		// we are the target
+							   withObject:nil];
 	}
 }
 
@@ -118,6 +130,15 @@
 				[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"New Message", [@"New Message from " stringByAppendingString:[msg sender]], [msg subject], [[NSImage imageNamed:@"toolbar_check"] TIFFRepresentation], nil] forKeys:[NSArray arrayWithObjects:@"GROWL_NOTIFICATION_NAME", @"GROWL_NOTIFICATION_TITLE", @"GROWL_NOTIFICATION_DESCRIPTION", @"GROWL_NOTIFICATION_ICON", nil]]
 				
 				];
+				
+				// Post new message to Activity Timeline too
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"ActivityNotify" object:
+				 
+				[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:@"New Message", [@"New Message from " stringByAppendingString:[msg sender]], [msg subject], [[NSImage imageNamed:@"toolbar_check"] TIFFRepresentation], nil] forKeys:[NSArray arrayWithObjects:@"GROWL_NOTIFICATION_NAME", @"GROWL_NOTIFICATION_TITLE", @"GROWL_NOTIFICATION_DESCRIPTION", @"GROWL_NOTIFICATION_ICON", nil]]
+				 
+				];
+				
+				
 				[newMessagesAlreadyNotified release];
 				newMessagesAlreadyNotified = [[newMessagesAlreadyNotified arrayByAddingObject:[msg identifier]] retain];
 			}
@@ -145,7 +166,10 @@
 }
 
 - (void)loadFullMessage:(XBMessage *)message {
-
+	
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	[[messageWebView mainFrame] stopLoading];
+	
 	NSString *toInsert;
 
 	if (message != nil) {
@@ -170,6 +194,7 @@
 		toInsert = @"<html></html>";
 
 	[[messageWebView mainFrame] loadHTMLString:toInsert baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]]];
+	[pool drain];
 }
 
 - (IBAction)openMessageCenter:(id)sender {

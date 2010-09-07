@@ -15,6 +15,8 @@
 
 
 + (BOOL)sendMessage:(NSString *)message to:(NSString *)gamertag usingWebView:(WebView *)webView {
+	
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 
 	NSStringEncoding encoding;
 	gamertag = [gamertag replace:@" " with:@"+"];
@@ -28,6 +30,8 @@
 	formSource = [formSource replace:@"</body>" with:script];
 
 	[[webView mainFrame] loadHTMLString:formSource baseURL:[NSURL URLWithString:@"http://live.xbox.com/en-US/profile/MessageCenter/"]];
+	
+	[pool drain];
 	
 	return YES;
 

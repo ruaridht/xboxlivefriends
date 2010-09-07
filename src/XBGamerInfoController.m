@@ -9,7 +9,7 @@
 #import "Xbox Live Friends.h"
 #import "XBGamerInfoController.h"
 #import "FriendsListController.h"
-
+#import "LoginController.h"
 
 @implementation XBGamerInfoController
 

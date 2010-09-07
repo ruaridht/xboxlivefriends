@@ -227,6 +227,8 @@ static BOOL loadThreaded = true;
 					[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:notificationName, notificationTitle, [newFriend info], [[newFriend tileImage] TIFFRepresentation], nil] forKeys:[NSArray arrayWithObjects:@"GROWL_NOTIFICATION_NAME", @"GROWL_NOTIFICATION_TITLE", @"GROWL_NOTIFICATION_DESCRIPTION", @"GROWL_NOTIFICATION_ICON", nil]]
 
 					];
+					
+					[[NSNotificationCenter defaultCenter] postNotificationName:@"ActivityNotify" object:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:notificationName, notificationTitle, [newFriend info], [[newFriend tileImage] TIFFRepresentation], nil] forKeys:[NSArray arrayWithObjects:@"GROWL_NOTIFICATION_NAME", @"GROWL_NOTIFICATION_TITLE", @"GROWL_NOTIFICATION_DESCRIPTION", @"GROWL_NOTIFICATION_ICON", nil]]];
 				}
 				
 			}
@@ -251,6 +253,8 @@ static BOOL loadThreaded = true;
 				[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:notificationName, notificationTitle, [newFriend info], [[newFriend tileImage] TIFFRepresentation], nil] forKeys:[NSArray arrayWithObjects:@"GROWL_NOTIFICATION_NAME", @"GROWL_NOTIFICATION_TITLE", @"GROWL_NOTIFICATION_DESCRIPTION", @"GROWL_NOTIFICATION_ICON", nil]]
 				
 				];
+				
+				[[NSNotificationCenter defaultCenter] postNotificationName:@"ActivityNotify" object:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:notificationName, notificationTitle, [newFriend info], [[newFriend tileImage] TIFFRepresentation], nil] forKeys:[NSArray arrayWithObjects:@"GROWL_NOTIFICATION_NAME", @"GROWL_NOTIFICATION_TITLE", @"GROWL_NOTIFICATION_DESCRIPTION", @"GROWL_NOTIFICATION_ICON", nil]]];
 			}
 			
 		}
@@ -584,7 +588,7 @@ static BOOL loadThreaded = true;
 }
 
 - (IBAction)openURLEmailUs:(id)sender{
-	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"mailto:northernysk@gmail.com"]];
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"mailto:lifeupnorth@me.com"]];
 }
 
 

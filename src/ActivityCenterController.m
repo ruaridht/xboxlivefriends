@@ -17,8 +17,13 @@
 		return nil;
 	}
 	
+	/*
 	timelinePosts = [[NSMutableArray array] retain];
 	timelinePostsTimes = [[NSMutableArray array] retain];
+	*/
+	
+	timelinePosts = [[NSMutableArray alloc] init];
+	timelinePostsTimes = [[NSMutableArray alloc] init];
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activityWithNotification:) name:@"ActivityNotify" object:nil];
 	
@@ -27,11 +32,14 @@
 
 - (void)awakeFromNib
 {
-	
+	[timelineWebview setShouldCloseWithWindow:NO];
 }
 
 - (void)dealloc
 {
+	[timelinePosts release];
+	[timelinePostsTimes release];
+	
 	[super dealloc];
 }
 
@@ -55,12 +63,25 @@
 
 - (void)redrawTimelineThreaded
 {
+	/*
 	NSInvocationOperation* theOp = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(redrawTimeline) object:nil];
 	[[[NSApp delegate] operationQueue] addOperation:theOp];
+	 */
+	
+	// THREAD_ATTEMPT
+	// We want to work with the webView in a separate thread.
+	[NSThread detachNewThreadSelector:@selector(redrawTimeline)
+							 toTarget:self		// we are the target
+						   withObject:nil];
 }
 
 - (void)redrawTimeline
 {
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	NSLog(@"Redrawing Activity Timeline");
+
+	[[timelineWebview mainFrame] stopLoading];
+	
 	NSString *theRow = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/activity_row.html"] encoding:NSMacOSRomanStringEncoding error:NULL];
 	NSString *theBody = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/activity_body.html"] encoding:NSMacOSRomanStringEncoding error:NULL];
 	NSString *allRows = @"<!-- something something -->";
@@ -85,7 +106,7 @@
 			@catch (NSException *exception){
 				//				NSLog([exception name]);
 				//				NSLog([exception reason]);
-				
+				NSLog(@"Couldn't log changes");
 			}
 			i++;
 		}
@@ -96,6 +117,8 @@
 	[theBodyMut replaceOccurrencesOfString:@"%items%" withString:allRows options:0 range:NSMakeRange(0, [theBodyMut length])];
 	
 	[[timelineWebview mainFrame] loadHTMLString:theBodyMut baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]]];
+	
+	[pool drain];
 }
 
 #pragma mark -
