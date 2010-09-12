@@ -37,11 +37,18 @@
 	
 }
 
+/*
 - (void)finalize
 {
 	NSLog(@"SHIT FINALIZED");
 	
 	[super finalize];
+}
+*/
+ 
+- (void)dealloc
+{
+	[super dealloc];
 }
 
 - (void)initialSignIn

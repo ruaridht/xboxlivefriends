@@ -19,6 +19,9 @@
 	
 	NSMutableArray *timelinePosts;
 	NSMutableArray *timelinePostsTimes;
+	
+	
+	NSTimer *drawLater;
 }
 
 - (void)activityWithNotification:(NSNotification *)notification;

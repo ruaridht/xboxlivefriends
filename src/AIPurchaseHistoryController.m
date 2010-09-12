@@ -86,6 +86,8 @@
 
 - (void)displayPurchasedList:(NSArray *)purchased
 {
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	
 	NSString *theRow = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/purchased_list_row.html"] encoding:NSMacOSRomanStringEncoding error:NULL];
 	NSString *theBody = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/purchased_list_body.html"] encoding:NSMacOSRomanStringEncoding error:NULL];
 	NSString *allRows = @"<!-- something something -->";
@@ -202,6 +204,8 @@
 	[theBodyMut replaceOccurrencesOfString:@"%items%" withString:allRows options:0 range:NSMakeRange(0, [theBodyMut length])];
 	
 	[[purchaseHistoryView mainFrame] loadHTMLString:theBodyMut baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]]];
+
+	[pool drain];
 }
 
 #pragma mark -

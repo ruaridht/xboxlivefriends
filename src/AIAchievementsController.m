@@ -60,6 +60,8 @@
 
 - (void)displayGamesPlayed:(NSArray *)gamesList forGamertag:(NSString *)gamertag
 {
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	
 	NSString *theRow = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/game_list_row.htm"] encoding:NSMacOSRomanStringEncoding error:NULL];
 	NSString *theBody = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/game_list_body.htm"] encoding:NSMacOSRomanStringEncoding error:NULL];
 	NSString *allRows = @"<!-- something something -->";
@@ -217,6 +219,8 @@
 	[theBodyMut replaceOccurrencesOfString:@"$games_list" withString:allRows options:0 range:NSMakeRange(0, [theBodyMut length])];
 	
 	[[comparisonWebView mainFrame] loadHTMLString:theBodyMut baseURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] resourcePath]]];
+	
+	[pool drain];
 }
 
 - (float)percentCompletedFromString:(NSString *)blankOfBlank

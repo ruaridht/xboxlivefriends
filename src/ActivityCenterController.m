@@ -17,21 +17,28 @@
 		return nil;
 	}
 	
+	timelinePosts = [NSMutableArray arrayWithCapacity:30];
+	timelinePostsTimes = [NSMutableArray arrayWithCapacity:30];
+	
 	/*
 	timelinePosts = [[NSMutableArray array] retain];
 	timelinePostsTimes = [[NSMutableArray array] retain];
 	*/
-	
+	/*
 	timelinePosts = [[NSMutableArray alloc] init];
 	timelinePostsTimes = [[NSMutableArray alloc] init];
+	*/
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activityWithNotification:) name:@"ActivityNotify" object:nil];
+	
+	drawLater = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(redrawTimeline) userInfo:nil repeats:YES];
 	
 	return self;
 }
 
 - (void)awakeFromNib
 {
+	[timelineWebview setUIDelegate:self];
 	[timelineWebview setShouldCloseWithWindow:NO];
 }
 
@@ -54,11 +61,16 @@
 	[timelinePosts insertObject:dick atIndex:0];
 	[timelinePostsTimes insertObject:[MQFunctions humanReadableDate:[NSDate dateWithTimeIntervalSinceNow:0.0]] atIndex:0];
 	
+	// We're going to draw the timeline every 15 seconds,
+	// rather than dynamically update - for now.
+	/*
 	if ([timelineEnabled state]) {
-		[self redrawTimelineThreaded];
+		//[self redrawTimelineThreaded];
+		[self redrawTimeline];
 	} else {
 		// Roll one
 	}
+	 */
 }
 
 - (void)redrawTimelineThreaded
@@ -70,6 +82,7 @@
 	
 	// THREAD_ATTEMPT
 	// We want to work with the webView in a separate thread.
+	
 	[NSThread detachNewThreadSelector:@selector(redrawTimeline)
 							 toTarget:self		// we are the target
 						   withObject:nil];
@@ -77,16 +90,17 @@
 
 - (void)redrawTimeline
 {
+	[NSObject cancelPreviousPerformRequestsWithTarget: self]; // Does this work?
 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
 	NSLog(@"Redrawing Activity Timeline");
 
 	[[timelineWebview mainFrame] stopLoading];
 	
-	NSString *theRow = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/activity_row.html"] encoding:NSMacOSRomanStringEncoding error:NULL];
-	NSString *theBody = [NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/activity_body.html"] encoding:NSMacOSRomanStringEncoding error:NULL];
+	NSString *theRow = [[NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/activity_row.html"] encoding:NSMacOSRomanStringEncoding error:NULL] autorelease];
+	NSString *theBody = [[NSString stringWithContentsOfFile:[NSString stringWithFormat:@"%@%@", [[NSBundle mainBundle] resourcePath], @"/activity_body.html"] encoding:NSMacOSRomanStringEncoding error:NULL] autorelease];
 	NSString *allRows = @"<!-- something something -->";
 	
-	NSMutableString *currentEditRow;
+	NSMutableString *currentEditRow = [[NSString string] autorelease]; 
 	
 	if([timelinePosts count] != 0){
 		int i = 0;
@@ -126,7 +140,7 @@
 
 - (IBAction)openTimeline:(id)sender
 {
-	[activityCenterWindow makeKeyAndOrderFront:nil];
+	[activityCenterWindow makeKeyAndOrderFront:self];
 	if ([timelineEnabled state]) {
 		[self redrawTimeline];
 	} else {

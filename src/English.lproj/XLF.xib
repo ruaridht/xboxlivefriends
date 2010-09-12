@@ -23,8 +23,8 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="4095"/>
 			<integer value="29"/>
+			<integer value="734"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -2217,6 +2217,10 @@
 				<string key="NSMaxSize">{3.40282e+38, 3.40282e+38}</string>
 			</object>
 			<object class="NSUserDefaultsController" id="723292381">
+				<object class="NSMutableArray" key="NSDeclaredKeys">
+					<bool key="EncodedWithXMLCoder">YES</bool>
+					<string>activityEnabled</string>
+				</object>
 				<bool key="NSSharedInstance">YES</bool>
 			</object>
 			<object class="NSWindowTemplate" id="200295471">
@@ -2976,7 +2980,7 @@ xujItMqKzGTOOtAU0efTttV51y/Y4NqP3Dvd6d+f4VvjJOT55uLo3+pD63zsoe257sLvv/Co8YvyVfMY
 							</object>
 							<string key="NSFrame">{{0, 36}, {360, 395}}</string>
 							<reference key="NSSuperview" ref="860645529"/>
-							<reference key="NSNextKeyView"/>
+							<reference key="NSWindow"/>
 							<bool key="NSViewCanDrawConcurrently">YES</bool>
 							<string key="FrameName"/>
 							<string key="GroupName"/>
@@ -3006,6 +3010,7 @@ xujItMqKzGTOOtAU0efTttV51y/Y4NqP3Dvd6d+f4VvjJOT55uLo3+pD63zsoe257sLvv/Co8YvyVfMY
 							<int key="NSvFlags">-2147483356</int>
 							<string key="NSFrame">{{20, 9}, {154, 19}}</string>
 							<reference key="NSSuperview" ref="860645529"/>
+							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="998011278">
 								<int key="NSCellFlags">-1543373312</int>
@@ -3030,6 +3035,7 @@ xujItMqKzGTOOtAU0efTttV51y/Y4NqP3Dvd6d+f4VvjJOT55uLo3+pD63zsoe257sLvv/Co8YvyVfMY
 							<int key="NSvFlags">293</int>
 							<string key="NSFrame">{{103, 9}, {154, 19}}</string>
 							<reference key="NSSuperview" ref="860645529"/>
+							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="359580846">
 								<int key="NSCellFlags">-2080244224</int>
@@ -3052,6 +3058,7 @@ xujItMqKzGTOOtAU0efTttV51y/Y4NqP3Dvd6d+f4VvjJOT55uLo3+pD63zsoe257sLvv/Co8YvyVfMY
 					</object>
 					<string key="NSFrameSize">{360, 431}</string>
 					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMinSize">{194, 261}</string>
@@ -3073,7 +3080,7 @@ xujItMqKzGTOOtAU0efTttV51y/Y4NqP3Dvd6d+f4VvjJOT55uLo3+pD63zsoe257sLvv/Co8YvyVfMY
 				<string key="NSWindowContentMaxSize">{3.40282e+38, 3.40282e+38}</string>
 				<string key="NSWindowContentMinSize">{565, 239}</string>
 				<object class="NSView" key="NSWindowView" id="871238235">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3811,6 +3818,7 @@ xujItMqKzGTOOtAU0efTttV51y/Y4NqP3Dvd6d+f4VvjJOT55uLo3+pD63zsoe257sLvv/Co8YvyVfMY
 						</object>
 					</object>
 					<string key="NSFrameSize">{565, 281}</string>
+					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1680, 1028}}</string>
 				<string key="NSMinSize">{565, 261}</string>
@@ -7790,35 +7798,6 @@ AAAAAAAAA</bytes>
 					<int key="connectionID">4102</int>
 				</object>
 				<object class="IBConnectionRecord">
-					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: values.growlEnabled</string>
-						<reference key="source" ref="5573480"/>
-						<reference key="destination" ref="723292381"/>
-						<object class="NSNibBindingConnector" key="connector">
-							<reference key="NSSource" ref="5573480"/>
-							<reference key="NSDestination" ref="723292381"/>
-							<string key="NSLabel">value: values.growlEnabled</string>
-							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">values.growlEnabled</string>
-							<object class="NSDictionary" key="NSOptions">
-								<bool key="EncodedWithXMLCoder">YES</bool>
-								<object class="NSArray" key="dict.sortedKeys">
-									<bool key="EncodedWithXMLCoder">YES</bool>
-									<string>NSNotApplicablePlaceholder</string>
-									<string>NSNullPlaceholder</string>
-								</object>
-								<object class="NSMutableArray" key="dict.values">
-									<bool key="EncodedWithXMLCoder">YES</bool>
-									<integer value="0"/>
-									<integer value="0"/>
-								</object>
-							</object>
-							<int key="NSNibBindingConnectorVersion">2</int>
-						</object>
-					</object>
-					<int key="connectionID">4109</int>
-				</object>
-				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">timelineEnabled</string>
 						<reference key="source" ref="549224290"/>
@@ -7849,6 +7828,35 @@ AAAAAAAAA</bytes>
 						<reference key="destination" ref="218180755"/>
 					</object>
 					<int key="connectionID">4120</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: values.activityEnabled</string>
+						<reference key="source" ref="5573480"/>
+						<reference key="destination" ref="723292381"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="5573480"/>
+							<reference key="NSDestination" ref="723292381"/>
+							<string key="NSLabel">value: values.activityEnabled</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">values.activityEnabled</string>
+							<object class="NSDictionary" key="NSOptions">
+								<bool key="EncodedWithXMLCoder">YES</bool>
+								<object class="NSArray" key="dict.sortedKeys">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<string>NSNotApplicablePlaceholder</string>
+									<string>NSNullPlaceholder</string>
+								</object>
+								<object class="NSMutableArray" key="dict.values">
+									<bool key="EncodedWithXMLCoder">YES</bool>
+									<integer value="0"/>
+									<integer value="0"/>
+								</object>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">4121</int>
 				</object>
 			</object>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -12764,7 +12772,7 @@ AAAAAAAAA</bytes>
 				</object>
 			</object>
 			<nil key="sourceID"/>
-			<int key="maxID">4120</int>
+			<int key="maxID">4121</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<object class="NSMutableArray" key="referencedPartialClassDescriptions">

@@ -54,6 +54,7 @@
 			[self clearErrorForTab];
 			[self clearTab];
 			if ([self threadedLoad]) {
+				
 				NSInvocationOperation* theOp = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(tabLoadThread:) object:gamertag];
 				[[[NSApp delegate] operationQueue] addOperation:theOp];	
 				//[NSThread detachNewThreadSelector:@selector(tabLoadThread:) toTarget:self withObject:gamertag];

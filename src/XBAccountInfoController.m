@@ -89,8 +89,16 @@
 	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"AIStartProgressIndicator" object:nil];
 	
+	/*
     NSInvocationOperation* theOp = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(lookupAccountInfoThreaded) object:nil];
 	[[[[NSApplication sharedApplication] delegate] operationQueue] addOperation:theOp];
+	*/
+	
+	// THREAD_ATTEMPT
+	// We want to work with the webView in a separate thread.
+	[NSThread detachNewThreadSelector:@selector(lookupAccountInfoThreaded)
+							 toTarget:self		// we are the target
+						   withObject:nil];
 	
 }
 
@@ -135,8 +143,16 @@
 
 - (void)fetchAccountSettingsInfo
 {
+	/*
 	NSInvocationOperation* theOp = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(fetchAccountSettingsInfoThreaded) object:nil];
 	[[[[NSApplication sharedApplication] delegate] operationQueue] addOperation:theOp];
+	 */
+	
+	// THREAD_ATTEMPT
+	// We want to work with the webView in a separate thread.
+	[NSThread detachNewThreadSelector:@selector(fetchAccountSettingsInfoThreaded)
+							 toTarget:self		// we are the target
+						   withObject:nil];
 }
 
 - (void)fetchAccountSettingsInfoThreaded

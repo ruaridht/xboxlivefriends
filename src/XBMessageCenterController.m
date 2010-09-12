@@ -104,9 +104,17 @@
 }
 
 - (void)loadMessageCenterThreaded {
+	/*
     NSInvocationOperation* theOp = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(loadMessageCenter) object:nil];
-     [[[[NSApplication sharedApplication] delegate] operationQueue] addOperation:theOp];	
+	[[[[NSApplication sharedApplication] delegate] operationQueue] addOperation:theOp];
+	 */
 //	[self performSelectorOnMainThread:@selector(loadMessageCenter) withObject:nil waitUntilDone:NO];
+	
+	// THREAD_ATTEMPT
+	// We want to work with the webView in a separate thread.
+	[NSThread detachNewThreadSelector:@selector(loadMessageCenter)
+							 toTarget:self		// we are the target
+						   withObject:nil];
 }
 
 - (void)loadMessageCenter {

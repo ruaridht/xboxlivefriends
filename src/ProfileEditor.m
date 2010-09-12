@@ -121,6 +121,8 @@
 
 - (IBAction)saveEditedProfile:(id)sender
 {
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	
 	NSString *formSource = editProfileSource;
 	
 	NSString* script = [NSString stringWithFormat: 
@@ -137,6 +139,8 @@
 	
 	[[editProfileWebView mainFrame] loadHTMLString:formSource baseURL:[NSURL URLWithString:@"https://live.xbox.com/en-US/accounts/"]];
 	[self profileInfoSaved];
+	
+	[pool drain];
 }
 
 - (IBAction)cancelEditProfile:(id)sender

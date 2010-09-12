@@ -180,8 +180,16 @@ StayAround *stayArounds;
 
 - (void)timedRefreshThreaded
 {
+	/*
 	NSInvocationOperation* theOp = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(timedRefresh) object:nil];
 	[[[NSApp delegate] operationQueue] addOperation:theOp];
+	 */
+	
+	// THREAD_ATTEMPT
+	// We want to work with the webView in a separate thread.
+	[NSThread detachNewThreadSelector:@selector(timedRefresh)
+							 toTarget:self		// we are the target
+						   withObject:nil];
 }
 
 #pragma mark -

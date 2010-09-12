@@ -67,8 +67,16 @@ static BOOL loadThreaded = true;
 }
 
 - (void)firstFriendsListLoad:(NSNotification *)notification {
+	/*
 	NSInvocationOperation* theOp = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(firstFriendsListLoadThread) object:nil];
-	[[[NSApp delegate] operationQueue] addOperation:theOp];	
+	[[[NSApp delegate] operationQueue] addOperation:theOp];
+	 */
+	
+	// THREAD_ATTEMPT
+	// We want to work with the webView in a separate thread.
+	[NSThread detachNewThreadSelector:@selector(firstFriendsListLoadThread)
+							 toTarget:self		// we are the target
+						   withObject:nil];
 }
 
 - (void)firstFriendsListLoadThread {
@@ -95,8 +103,16 @@ static BOOL loadThreaded = true;
 
 - (void)friendsListNeedsRefresh:(NSNotification *)notification {
 	if (loadThreaded) {
+		/*
 		NSInvocationOperation* theOp = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(refreshFriendsListThread) object:nil];
-		[[[NSApp delegate] operationQueue] addOperation:theOp];	
+		[[[NSApp delegate] operationQueue] addOperation:theOp];
+		 */
+		
+		// THREAD_ATTEMPT
+		// We want to work with the webView in a separate thread.
+		[NSThread detachNewThreadSelector:@selector(refreshFriendsListThread)
+								 toTarget:self		// we are the target
+							   withObject:nil];
 	}
    else {
 		if ([self downloadFriendsList])
@@ -110,8 +126,15 @@ static BOOL loadThreaded = true;
 
 - (void)friendsListNeedsRedraw:(NSNotification *)notification {
 	if (loadThreaded) {
+		/*
 		NSInvocationOperation* theOp = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(displayFriendsListThread) object:nil];
-		[[[NSApp delegate] operationQueue] addOperation:theOp];	
+		[[[NSApp delegate] operationQueue] addOperation:theOp];
+		 */
+		// THREAD_ATTEMPT
+		// We want to work with the webView in a separate thread.
+		[NSThread detachNewThreadSelector:@selector(displayFriendsListThread)
+								 toTarget:self		// we are the target
+							   withObject:nil];
 	}
    else
 		[self displayFriendsList];
@@ -267,6 +290,7 @@ static BOOL loadThreaded = true;
 	NSLog(@"displayFriendsList");
 	[tableViewItems removeAllObjects];
 	[friendsOnline removeAllObjects];
+	/*
 	for (XBFriend *currentFriend in friends) {
 		[tableViewItems addObject:[currentFriend tableViewRecord]];
 		
@@ -275,7 +299,27 @@ static BOOL loadThreaded = true;
 		}
 	}
 	[friendsTable reloadData];
+	 */
+	
+	// THREAD_ATTEMPT
+	// We want to work with the webView in a separate thread.
+	[NSThread detachNewThreadSelector:@selector(displayFriendsListOnSeparateThread)
+							 toTarget:self		// we are the target
+						   withObject:nil];
+	
 	[[NSNotificationCenter defaultCenter] postNotificationName:@"StatusMenuDisplayFriendsList" object:friendsOnline];
+}
+
+- (void)displayFriendsListOnSeparateThread 
+{
+	for (XBFriend *currentFriend in friends) {
+		[tableViewItems addObject:[currentFriend tableViewRecord]];
+		
+		if ([[currentFriend status] isNotEqualTo:@"Offline"]){
+			[friendsOnline addObject:currentFriend];
+		}
+	}
+	[friendsTable reloadData];
 }
 
 - (void)displayFriendsListThread {
@@ -307,8 +351,15 @@ static BOOL loadThreaded = true;
 {
 	if ([notification object]) {
 		//[self addFriendWithTag:[notification object]];
+		/*
 		NSInvocationOperation* theOp = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(addFriendWithTag:) object:[notification object]];
 		[[[NSApp delegate] operationQueue] addOperation:theOp];
+		 */
+		// THREAD_ATTEMPT
+		// We want to work with the webView in a separate thread.
+		[NSThread detachNewThreadSelector:@selector(addFriendWithTag:)
+								 toTarget:self		// we are the target
+							   withObject:[notification object]];
 	}
 }
 
