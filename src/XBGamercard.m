@@ -8,10 +8,10 @@
 #import "Xbox Live Friends.h"
 #import "XBGamercard.h"
 
-#define PROFILE_URL @"http://live.xbox.com/en-US/default.aspx"
+#define PROFILE_URL @"http://live.xbox.com:80/en-US/MyXbox/Profile"
 #define EDIT_PROFILE_URL @"https://live.xbox.com/en-US/signup/UIPStartPage.aspx?appid=xboxcom_gamerCard"
 #define GAMERCARD_URL @"http://live.xbox.com/en-US/profile/profile.aspx?pp=0&GamerTag="
-#define SHELLGAMERCARD @"http://live.xbox.com/ShellGamercardV2.ashx"
+#define SHELLGAMERCARD	@"http://live.xbox.com:80/Handlers/ShellData.ashx"
 
 //NSString* gamerCardURL = @"http://live.xbox.com/en-US/profile/profile.aspx?pp=0&GamerTag=";
 //NSString* shellGamercard = @"http://live.xbox.com/ShellGamercardV2.ashx";
@@ -119,15 +119,16 @@
 	// Fetching the extra source takes its time, so will leave it out till we need it.
 	//NSString *editProfileSource = [NSString stringWithContentsOfURL:[NSURL URLWithString:EDIT_PROFILE_URL] encoding:NSUTF8StringEncoding error:nil];
 	
-	gamertag = [shellCard cropFrom:@"<p><a href=\"http://live.xbox.com/en-US/default.aspx\">" to:@"</a>"];
+	gamertag = [shellCard cropFrom:@"\"gamertag\": \"" to:@"\""];
 	
-	NSString *tileURL = [shellCard cropFrom:@"default.aspx\"><img src=\"" to:@"\""];
+	NSString *tileURL = [shellCard cropFrom:@"\"gamerpic\": \"" to:@"\""];
 	gamertile = [NSURL URLWithString:tileURL];
 	
-	gamerscore = [shellCard cropFrom:@"\"PointsIcon\" /><span> " to:@"</span>"];
+	gamerscore = [shellCard cropFrom:@"\"gamerscore\": \"" to:@"\""];
 	
-	motto = [profileSource cropFrom:@"<span id=\"ctl00_MainContent_myXboxAvatarCard_mottoLabel\">" to:@"</span>"];
+	motto = [profileSource cropFrom:@"<div id=\"Motto\">" to:@"</div>"];
 	
+	/*
 	//find rep
 	NSString *repNumerator = [MQFunctions cropString:profileSource between:@"MyXbox/repstars" and:@"."];
 	rep = [repNumerator floatValue] / 20.0;
@@ -135,10 +136,13 @@
 	//Get golden repstars
 	NSString *repStarsURL = [NSString stringWithFormat:@"http://live.xbox.com/xweb/lib/images/MyXbox/repstars%@.png", repNumerator];
 	repStars = [[NSImage alloc] initWithContentsOfURL:[NSURL URLWithString:repStarsURL]];
+	*/
 	
-	bio = @"";
-	location = @"";
-	realName = @"";
+	NSString *profInfo = [profileSource cropFrom:@"<div id=\"ProfileInfo\">" to:@"</div>"];
+	
+	bio = [profInfo cropFrom:@"<div id=\"bio\">" to:@""];
+	location = [profInfo cropFrom:@"<h3 title=\"" to:@"\""];
+	realName = [profInfo cropFrom:@"<h2 title=\"" to:@"\""];
 	
 	// gamerzone can't be found anywhere anymore?
 }

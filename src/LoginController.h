@@ -29,6 +29,8 @@
 	NSString *friendsListSource1;
 	
 	BOOL signingOut;
+	
+	NSMutableData *theData;
 
 }
 

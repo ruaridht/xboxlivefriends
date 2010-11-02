@@ -15,7 +15,9 @@
 #include "LoginController.h"
 #import "StatusItemView.h"
 
-#define SHELLGAMERCARD @"http://live.xbox.com/ShellGamercardV2.ashx"
+#define SHELLGAMERCARD	@"http://live.xbox.com:80/Handlers/ShellData.ashx"
+#define FRIENDS_REF		@"http://live.xbox.com:80/en-US/friendcenter/Friends"
+#define	FRIENDS_PAGE	@"http://live.xbox.com:80/en-US/friendcenter?xr=shellnav"
 
 static BOOL loadThreaded = true;
 
@@ -59,6 +61,8 @@ static BOOL loadThreaded = true;
 	FriendStatusCell *statusCell = [[FriendStatusCell alloc] init];
 	[statusCell setControlView:friendsTable];
 	[[friendsTable tableColumnWithIdentifier:@"gt_and_status"] setDataCell:statusCell];
+	firstLoad = YES;
+	
 }
 
 - (void)dealloc
@@ -66,26 +70,29 @@ static BOOL loadThreaded = true;
 	[super dealloc];
 }
 
-- (void)firstFriendsListLoad:(NSNotification *)notification {
-	/*
+- (void)firstFriendsListLoad:(NSNotification *)notification
+{
 	NSInvocationOperation* theOp = [[NSInvocationOperation alloc] initWithTarget:self selector:@selector(firstFriendsListLoadThread) object:nil];
 	[[[NSApp delegate] operationQueue] addOperation:theOp];
-	 */
-	
+	/*
 	// THREAD_ATTEMPT
 	// We want to work with the webView in a separate thread.
 	[NSThread detachNewThreadSelector:@selector(firstFriendsListLoadThread)
 							 toTarget:self		// we are the target
 						   withObject:nil];
+	 */
 }
 
 - (void)firstFriendsListLoadThread {
 	[self performSelectorOnMainThread:@selector(friendsListLocked:) withObject:[NSNumber numberWithBool:YES] waitUntilDone:NO];
+	/*
 	if ([self downloadFriendsList]) {
 		[self displayFriendsList];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"FirstFriendsLoaded" object:nil];
 		[[NSNotificationCenter defaultCenter] postNotificationName:@"StatusMenuChangeStatus" object:@"You Are Online"];
 	}
+	 */
+	[self downloadFriendsList];
 }
 
 - (void)friendsListLocked:(NSNumber *)lockedNum {
@@ -115,8 +122,11 @@ static BOOL loadThreaded = true;
 							   withObject:nil];
 	}
    else {
+	   /*
 		if ([self downloadFriendsList])
 			[self displayFriendsList];
+		*/
+	   [self downloadFriendsList];
    }
 }
 
@@ -140,11 +150,15 @@ static BOOL loadThreaded = true;
 		[self displayFriendsList];
 }
 
-- (BOOL)downloadFriendsList {
+- (BOOL)downloadFriendsList
+{
 	NSLog(@"downloadFriendsList");
 	oldFriends = friends;
 	
-	friends = [FriendsListParser friends];
+	[self performSelectorOnMainThread:@selector(getFriendListSource) withObject:nil waitUntilDone:YES];
+	
+	/*
+	friends = [FriendsListParser friendsWithSource:friendListSource];
 	
 	BOOL success = NO;
 	if (friends) {
@@ -152,6 +166,7 @@ static BOOL loadThreaded = true;
 		success = YES;
 		[self checkFriendsForStatusChange:friends oldFriends:oldFriends];
 		[self displayMyGamercard];
+		[self displayFriendsList];
 		//[self showDockMenu];
 		//[self performSelectorOnMainThread:@selector(showDockMenu) withObject:nil waitUntilDone:NO];
 
@@ -167,9 +182,70 @@ static BOOL loadThreaded = true;
 		
 	}
 	
+	if (firstLoad) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"FirstFriendsLoaded" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"StatusMenuChangeStatus" object:@"You Are Online"];
+		firstLoad = NO;
+	}
+	*/
 
 	[[NSGarbageCollector defaultCollector] collectIfNeeded];
-	return success;
+	return YES;
+}
+
+- (void)parseAndDisplayFriendsList
+{
+	NSLog(@"ParsingAndDisplay");
+	friends = [FriendsListParser friendsWithSource:friendListSource];
+	
+	BOOL success = NO;
+	if (friends) {
+		
+		success = YES;
+		[self checkFriendsForStatusChange:friends oldFriends:oldFriends];
+		[self displayMyGamercard];
+		[self displayFriendsList];
+		//[self showDockMenu];
+		//[self performSelectorOnMainThread:@selector(showDockMenu) withObject:nil waitUntilDone:NO];
+		
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeFriendsListMode" object:@"friends"];
+		
+		[self performSelectorOnMainThread:@selector(friendsListLocked:) withObject:[NSNumber numberWithBool:NO] waitUntilDone:YES];
+		
+	}
+	else {
+		NSLog(@"Friends = nil");
+		[self performSelectorOnMainThread:@selector(friendsListLocked:) withObject:[NSNumber numberWithBool:YES] waitUntilDone:YES];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"FriendsListConnectionError" object:nil];
+		
+	}
+	
+	if (firstLoad) {
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"FirstFriendsLoaded" object:nil];
+		[[NSNotificationCenter defaultCenter] postNotificationName:@"StatusMenuChangeStatus" object:@"You Are Online"];
+		firstLoad = NO;
+	}
+}
+
+- (void)getFriendListSource
+{
+	theData = nil;
+	
+	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:FRIENDS_REF] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+	[theRequest setMainDocumentURL:[NSURL URLWithString:FRIENDS_PAGE]];
+	[theRequest addValue:@"text/html, */*" forHTTPHeaderField:@"Accept"];
+	[theRequest addValue:@"http://live.xbox.com:80/en-US/friendcenter?xr=shellnav" forHTTPHeaderField:@"Referer"];
+	[theRequest addValue:@"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_4; en-us) AppleWebKit/533.18.1 (KHTML, like Gecko) Version/5.0.2 Safari/533.18.5" forHTTPHeaderField:@"User-Agent"];
+	[theRequest addValue:@"XMLHttpRequest" forHTTPHeaderField:@"X-Requested-With"];
+	
+	NSURLConnection *theConnection = [[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+	 
+	if (theConnection) {
+		NSLog(@"Connection succeeded");
+		theData = [[NSMutableData data] retain];
+	} else {
+		NSLog(@"FLC Connection Failed");
+	}
 }
 
 - (void)showDockMenu {
@@ -328,9 +404,11 @@ static BOOL loadThreaded = true;
 
 
 - (void)refreshFriendsListThread {
-
+	/*
 	if ([self downloadFriendsList])
 		[self displayFriendsList];
+	 */
+	[self downloadFriendsList];
 	
 }
 
@@ -752,9 +830,87 @@ static BOOL loadThreaded = true;
 + (NSString *)myGamertag
 {
 	NSString *shellCard = [NSString stringWithContentsOfURL:[NSURL URLWithString:SHELLGAMERCARD] encoding:NSUTF8StringEncoding error:nil];
-	NSString *tempGamertag = [shellCard cropFrom:@"<p><a href=\"http://live.xbox.com/en-US/default.aspx\">" to:@"</a>"];
+	NSString *tempGamertag = [shellCard cropFrom:@"gamertag\": \"" to:@"\""];
 	
 	return tempGamertag;
+}
+
+#pragma mark -
+#pragma mark NSURLConnection delegates
+
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
+{
+	NSLog(@"URLConnection can authenticate against protection space: YES");
+	return [protectionSpace receivesCredentialSecurely];
+}
+
+- (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+{
+	NSLog(@"URLConnection cancelled authentication");
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+	NSLog(@"URLConnection Failed");
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+{
+	NSLog(@"Receieved Authentication Challenge");
+	//[[challenge sender] useCredential:[NSURLCredential credentialWithUser:[email stringValue] password:[password stringValue] persistence:NSURLCredentialPersistenceForSession] forAuthenticationChallenge:challenge];
+	/*
+	if ([challenge previousFailureCount] == 0) {
+		NSURLCredential *newCredential;
+		newCredential = [NSURLCredential credentialWithUser:[email stringValue]
+												   password:[password stringValue]
+												persistence:NSURLCredentialPersistenceForSession];
+		[[challenge sender] useCredential:newCredential forAuthenticationChallenge:challenge];
+	} else {
+		[[challenge sender] cancelAuthenticationChallenge:challenge];
+		NSLog(@"Bad Username Or Password");
+	}*/
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+	//NSLog(@"URLConnection received data");
+	//NSLog(@"Data: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+	[theData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+	NSLog(@"URLConnection received response");
+	//NSLog(@"URL: %@", [[response URL] absoluteString]);
+}
+
+- (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
+{
+	
+}
+
+- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse
+{
+	return cachedResponse;
+}
+
+- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse
+{
+	return request;
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+	NSLog(@"URLConnection finished loading");
+	//NSLog(@"Data: %@", [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding]);
+	friendListSource = [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding];
+	[self parseAndDisplayFriendsList];
+}
+
+- (BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection
+{
+	//NSLog(@"URLConnection should use credential storage: YES");
+	return YES;
 }
 
 @end

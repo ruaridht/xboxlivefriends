@@ -48,12 +48,18 @@
 	MAAttachedWindow *requestPop;
 	IBOutlet NSView *wantsToBeView;
 	IBOutlet NSView *youRequestedView;
-
+	
+	NSMutableData *theData;
+	NSString *friendListSource;
+	BOOL receivedSource;
+	BOOL firstLoad;
 }
 
 @property(copy) NSArray *friends;
 
 - (BOOL)downloadFriendsList;
+- (void)parseAndDisplayFriendsList;
+- (void)getFriendListSource;
 - (void)displayFriendsList;
 - (void)showDockMenu;
 - (void)checkFriendsForStatusChange:(NSArray *)newFriends oldFriends:(NSArray *)oldFriends;

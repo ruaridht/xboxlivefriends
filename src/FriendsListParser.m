@@ -9,16 +9,23 @@
 #import "Xbox Live Friends.h"
 #import "LoginController.h"
 
-#define FRIEND_PAGE @"http://live.xbox.com/en-US/profile/Friends.aspx"
+#define FRIEND_PAGE_OLD @"http://live.xbox.com/en-US/profile/Friends.aspx"
+#define FRIEND_PAGE @"http://live.xbox.com:80/en-US/friendcenter/Friends"
+#define FRIEND_REF @"http://live.xbox.com:80/en-US/friendcenter?xr=shellnav"
 #define STATUS_NEW_LINE_REPLACEMENT @" - "
 
 //NSString* friendsListURL = @"http://live.xbox.com/en-US/profile/Friends.aspx";
 //NSString* statusNewlineReplacement = @" - ";
 
+@class FriendsListController;
+
 @implementation FriendsListParser
 
-+ (NSArray *)friends {
-
++ (NSArray *)friends
+{
+	// Until everything is fixed we will return nil.
+	return nil;
+	
 	NSArray *friendsArray;
 	NSLog(@"Getting friends list HTML");
 	NSString *theSource = [NSString stringWithContentsOfURL:[NSURL URLWithString:FRIEND_PAGE] encoding:NSUTF8StringEncoding error:nil];
@@ -75,30 +82,13 @@
 
 	return friendsArray;
 }
-
-+ (NSArray *)friendsWithSource:(NSString *)theSource {
-	if ([theSource contains:@"<title>Continue</title>"]) {
-		[NSException raise:@"Signed Out" format:@"Please sign in to Windows Live ID."];
-	}
-
+/*
++ (NSArray *)friendsWithSource:(NSString *)theSource
+{
 	NSMutableArray *friends = [[NSMutableArray alloc] init];
-	
 	
 	NSArray *rows = [theSource cropRowsMatching:@"<tr" rowEnd:@"</tr>"];
 	
-	/* BOOL demoMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"DebugDemoMode"];
-	
-	if (demoMode) {
-		//demo mode shit
-		[friends addObject:[XBFriend friendWithTag:@"my hand" tileURLString:@"http://www.xbox.com/NR/rdonlyres/A5B41DAF-4921-4478-B5D6-955B537E02BD/0/cod4forcerecon01.jpg" statusString:@"Online" infoString:@"Call of Duty 4 - Search and Destroy on Creek"]];
-		[friends addObject:[XBFriend friendWithTag:@"Darksoul0X" tileURLString:@"http://tiles.xbox.com/tiles/IL/Ef/0mdsb2JgbC8RX1ZeV0oAGAZfL3RpbGUvMC8xODBlZQAAAQAAAAD9MLEA.jpg" statusString:@"Online" infoString:@"Xbox 360 Dashboard"]];
-		[friends addObject:[XBFriend friendWithTag:@"hkmhrnz777" tileURLString:@"http://tiles.xbox.com/tiles/nw/6K/1Gdsb2JgbC9CCgUNBBwAGAFYL3RpbGUvMC8xODAwNgAAAQAAAAD7pQ6-.jpg" statusString:@"Online" infoString:@"Gears of War - Execution Mansion"]];
-		[friends addObject:[XBFriend friendWithTag:@"Unholy Vanny" tileURLString:@"http://www.xbox.com/NR/rdonlyres/A5B41DAF-4921-4478-B5D6-955B537E02BD/0/cod4forcerecon01.jpg" statusString:@"Online" infoString:@"Rainbow Six Vegas - Campaign"]];
-		[friends addObject:[XBFriend friendWithTag:@"KnownEvil Homer" tileURLString:@"http://tiles.xbox.com/tiles/09/4Q/1mdsb2JgbC9ECgRcBBwAF1EPL3RpbGUvMC8xODAwMAAAAQAAAAD5P97z.jpg" statusString:@"Busy" infoString:@"47 minutes ago - Xbox 360 Dashboard"]];
-		[friends addObject:[XBFriend friendWithTag:@"Omega Spawn" tileURLString:@"http://tiles.xbox.com/tiles/BK/Hv/1Gdsb2JgbC8SCgUMBRkAGAFbL3RpbGUvMC8xODAwZgAAAQAAAAD7wKEk.jpg" statusString:@"Away" infoString:@"Watching a movie"]];
-	}
-	*/
-
 	for (NSString *row in rows) {
 		
 		if (![row contains:@"GamerTag="])
@@ -132,21 +122,6 @@
 
 
 		XBFriend *theFriend = [XBFriend friendWithTag:gamertag tileURLString:gamertileURL statusString:status infoString:richPresence];
-		
-		/*
-		if (demoMode) {
-		
-			if ([status isEqualToString:@"Pending"]) {
-				[friends insertObject:theFriend atIndex:0];
-				continue;
-			}
-			
-			if (![status isEqualToString:@"Offline"]) {
-				[friends insertObject:theFriend atIndex:1];
-				continue;
-			}
-		}
-		*/
 
 		[friends addObject:theFriend];
 
@@ -156,7 +131,134 @@
 
 	return [friends copy];
 }
-
+*/
++ (NSArray *)friendsWithSource:(NSString *)theSource
+{
+	/*
+	 if ([theSource contains:@"<title>Continue</title>"]) {
+	 [NSException raise:@"Signed Out" format:@"Please sign in to Windows Live ID."];
+	 }
+	 */
+	
+	NSMutableArray *friends = [[NSMutableArray alloc] init];
+	
+	NSString *online = [theSource cropFrom:@"<dl id=\"fc-online\">" to:@"</dl>"];
+	NSString *pending = [theSource cropFrom:@"<dl id=\"fc-pending\">" to:@"</dl>"];
+	NSString *offline = [theSource cropFrom:@"<dl id=\"fc-offline\">" to:@"</dl>"];
+	
+	NSArray *onlineRows = [online cropRowsMatching:@"<dd id=" rowEnd:@"</dd>"];
+	NSArray *pendingRows = [pending cropRowsMatching:@"<dd id=" rowEnd:@"</dd>"];
+	NSArray *offlineRows = [offline cropRowsMatching:@"<dd id=" rowEnd:@"</dd>"];
+	
+	/* BOOL demoMode = [[NSUserDefaults standardUserDefaults] boolForKey:@"DebugDemoMode"];
+	 
+	 if (demoMode) {
+	 //demo mode shit
+	 [friends addObject:[XBFriend friendWithTag:@"my hand" tileURLString:@"http://www.xbox.com/NR/rdonlyres/A5B41DAF-4921-4478-B5D6-955B537E02BD/0/cod4forcerecon01.jpg" statusString:@"Online" infoString:@"Call of Duty 4 - Search and Destroy on Creek"]];
+	 [friends addObject:[XBFriend friendWithTag:@"Darksoul0X" tileURLString:@"http://tiles.xbox.com/tiles/IL/Ef/0mdsb2JgbC8RX1ZeV0oAGAZfL3RpbGUvMC8xODBlZQAAAQAAAAD9MLEA.jpg" statusString:@"Online" infoString:@"Xbox 360 Dashboard"]];
+	 [friends addObject:[XBFriend friendWithTag:@"hkmhrnz777" tileURLString:@"http://tiles.xbox.com/tiles/nw/6K/1Gdsb2JgbC9CCgUNBBwAGAFYL3RpbGUvMC8xODAwNgAAAQAAAAD7pQ6-.jpg" statusString:@"Online" infoString:@"Gears of War - Execution Mansion"]];
+	 [friends addObject:[XBFriend friendWithTag:@"Unholy Vanny" tileURLString:@"http://www.xbox.com/NR/rdonlyres/A5B41DAF-4921-4478-B5D6-955B537E02BD/0/cod4forcerecon01.jpg" statusString:@"Online" infoString:@"Rainbow Six Vegas - Campaign"]];
+	 [friends addObject:[XBFriend friendWithTag:@"KnownEvil Homer" tileURLString:@"http://tiles.xbox.com/tiles/09/4Q/1mdsb2JgbC9ECgRcBBwAF1EPL3RpbGUvMC8xODAwMAAAAQAAAAD5P97z.jpg" statusString:@"Busy" infoString:@"47 minutes ago - Xbox 360 Dashboard"]];
+	 [friends addObject:[XBFriend friendWithTag:@"Omega Spawn" tileURLString:@"http://tiles.xbox.com/tiles/BK/Hv/1Gdsb2JgbC8SCgUMBRkAGAFbL3RpbGUvMC8xODAwZgAAAQAAAAD7wKEk.jpg" statusString:@"Away" infoString:@"Watching a movie"]];
+	 }
+	 */
+	
+	for (NSString *row in onlineRows) {
+		/*
+		if (![row contains:@"fc-gtag"])
+			continue;
+		*/
+		
+		NSString *gamertag = [row cropFrom:@"fc-gtag-" to:@"\""];
+		
+		NSString *gamertileURL = [row cropFrom:@"<img src=\"" to:@"\""];
+		if ([gamertileURL contains:@"QuestionMark32x32.jpg"])
+			gamertileURL = @"http://live.xbox.com/xweb/lib/images/QuestionMark32x32.jpg";
+		
+		NSString *status = @"Online";
+		
+		NSString *richPresence = [row cropFrom:@"<div class=\"fc-presence-text\">" to:@"</div>"];
+		richPresence = [richPresence replace:@"&nbsp;" with:@" "];
+		richPresence = [richPresence replace:@"<br />" with:@"\n"];
+		richPresence = [richPresence replace:@"<br>" with:@"\n"];
+		richPresence = [richPresence replace:@"\r\n" with:@"\n"];
+		richPresence = [richPresence replace:@"\r" with:@"\n"];
+		richPresence = [richPresence replace:@"Playing " with:@""];
+		richPresence = [richPresence replace:@"online " with:@""];
+		
+		richPresence = [richPresence stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		richPresence = [richPresence replace:@"\n" with:STATUS_NEW_LINE_REPLACEMENT];
+		richPresence = [richPresence replace:@"   " with:@" "];
+		
+		
+		XBFriend *theFriend = [XBFriend friendWithTag:gamertag tileURLString:gamertileURL statusString:status infoString:richPresence];
+		
+		/*
+		 if (demoMode) {
+		 
+		 if ([status isEqualToString:@"Pending"]) {
+		 [friends insertObject:theFriend atIndex:0];
+		 continue;
+		 }
+		 
+		 if (![status isEqualToString:@"Offline"]) {
+		 [friends insertObject:theFriend atIndex:1];
+		 continue;
+		 }
+		 }
+		 */
+		
+		[friends addObject:theFriend];
+	}
+	
+	for (NSString *row in pendingRows) {
+		NSString *gamertag = [row cropFrom:@"fc-gtag-" to:@"\""];
+		
+		NSString *gamertileURL = [row cropFrom:@"<img src=\"" to:@"\""];
+		if ([gamertileURL contains:@"QuestionMark32x32.jpg"])
+			gamertileURL = @"http://live.xbox.com/xweb/lib/images/QuestionMark32x32.jpg";
+		
+		NSString *status = @"Pending";
+		
+		NSString *richPresence = @"Friend Request";
+		
+		XBFriend *theFriend = [XBFriend friendWithTag:gamertag tileURLString:gamertileURL statusString:status infoString:richPresence];
+		
+		[friends addObject:theFriend];
+	}
+	
+	for (NSString *row in offlineRows) {
+		NSString *gamertag = [row cropFrom:@"fc-gtag-" to:@"\""];
+		
+		NSString *gamertileURL = [row cropFrom:@"<img src=\"" to:@"\""];
+		if ([gamertileURL contains:@"QuestionMark32x32.jpg"])
+			gamertileURL = @"http://live.xbox.com/xweb/lib/images/QuestionMark32x32.jpg";
+		
+		NSString *status = @"Offline";
+		
+		NSString *richPresence = [row cropFrom:@"headers=\"Info\">" to:@"</td>"];
+		richPresence = [richPresence replace:@"&nbsp;" with:@" "];
+		richPresence = [richPresence replace:@"<br />" with:@"\n"];
+		richPresence = [richPresence replace:@"<br>" with:@"\n"];
+		richPresence = [richPresence replace:@"\r\n" with:@"\n"];
+		richPresence = [richPresence replace:@"\r" with:@"\n"];
+		richPresence = [richPresence replace:@"Playing " with:@""];
+		if ([richPresence contains:@"Last seen "]) {
+			richPresence = [richPresence replace:@"Last seen " with:@""];
+			richPresence = [richPresence replace:@" playing " with:@"\n"];
+		}
+		richPresence = [richPresence stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		richPresence = [richPresence replace:@"\n" with:STATUS_NEW_LINE_REPLACEMENT];
+		richPresence = [richPresence replace:@"   " with:@" "];
+		
+		
+		XBFriend *theFriend = [XBFriend friendWithTag:gamertag tileURLString:gamertileURL statusString:status infoString:richPresence];
+		
+		[friends addObject:theFriend];
+	}
+	
+	return [friends copy];
+}
 
 @end
 

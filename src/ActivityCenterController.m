@@ -31,7 +31,7 @@
 	
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(activityWithNotification:) name:@"ActivityNotify" object:nil];
 	
-	drawLater = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(redrawTimeline) userInfo:nil repeats:YES];
+	//drawLater = [NSTimer scheduledTimerWithTimeInterval:15.0 target:self selector:@selector(redrawTimeline) userInfo:nil repeats:YES];
 	
 	return self;
 }
