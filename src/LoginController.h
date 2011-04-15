@@ -40,6 +40,8 @@
 - (IBAction)logoutButtonClicked:(id)sender;
 - (BOOL)logoutOfPassport;
 
+- (void)openConnection;
+
 - (IBAction)OpenSignIn:(id)sender;
 - (IBAction)CloseSignIn:(id)sender;
 - (IBAction)retryLoadingPage:(id)sender;

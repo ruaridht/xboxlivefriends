@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="7.10">
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
-		<string key="IBDocument.SystemVersion">10F569</string>
+		<string key="IBDocument.SystemVersion">10J567</string>
 		<string key="IBDocument.InterfaceBuilderVersion">804</string>
-		<string key="IBDocument.AppKitVersion">1038.29</string>
-		<string key="IBDocument.HIToolboxVersion">461.00</string>
+		<string key="IBDocument.AppKitVersion">1038.35</string>
+		<string key="IBDocument.HIToolboxVersion">462.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<bool key="EncodedWithXMLCoder">YES</bool>
 			<object class="NSArray" key="dict.sortedKeys">
@@ -1510,7 +1510,7 @@
 				<string key="NSWindowContentMaxSize">{775, 382}</string>
 				<string key="NSWindowContentMinSize">{775, 382}</string>
 				<object class="NSView" key="NSWindowView" id="321268997">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1540,6 +1540,8 @@
 							</object>
 							<string key="NSFrame">{{0, 42}, {775, 277}}</string>
 							<reference key="NSSuperview" ref="321268997"/>
+							<reference key="NSWindow"/>
+							<reference key="NSNextKeyView"/>
 							<string key="FrameName"/>
 							<string key="GroupName"/>
 							<object class="WebPreferences" key="Preferences" id="505513941">
@@ -1594,6 +1596,7 @@
 							<int key="NSvFlags">258</int>
 							<string key="NSFrame">{{-24, 39}, {818, 5}}</string>
 							<reference key="NSSuperview" ref="321268997"/>
+							<reference key="NSWindow"/>
 							<string key="NSOffsets">{0, 0}</string>
 							<object class="NSTextFieldCell" key="NSTitleCell">
 								<int key="NSCellFlags">67239424</int>
@@ -1626,6 +1629,7 @@
 											<int key="NSvFlags">258</int>
 											<string key="NSFrame">{{47, 15}, {509, 14}}</string>
 											<reference key="NSSuperview" ref="476207536"/>
+											<reference key="NSWindow"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTextFieldCell" key="NSCell" id="126184307">
 												<int key="NSCellFlags">67239488</int>
@@ -1642,6 +1646,7 @@
 											<int key="NSvFlags">258</int>
 											<string key="NSFrame">{{47, 32}, {509, 17}}</string>
 											<reference key="NSSuperview" ref="476207536"/>
+											<reference key="NSWindow"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSTextFieldCell" key="NSCell" id="280369148">
 												<int key="NSCellFlags">67239424</int>
@@ -1674,6 +1679,7 @@
 											</object>
 											<string key="NSFrame">{{10, 15}, {32, 32}}</string>
 											<reference key="NSSuperview" ref="476207536"/>
+											<reference key="NSWindow"/>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSImageCell" key="NSCell" id="315923402">
 												<int key="NSCellFlags">130560</int>
@@ -1692,10 +1698,12 @@
 									</object>
 									<string key="NSFrameSize">{569, 62}</string>
 									<reference key="NSSuperview" ref="184975599"/>
+									<reference key="NSWindow"/>
 								</object>
 							</object>
 							<string key="NSFrame">{{0, 320}, {569, 62}}</string>
 							<reference key="NSSuperview" ref="321268997"/>
+							<reference key="NSWindow"/>
 							<string key="NSOffsets">{0, 0}</string>
 							<object class="NSTextFieldCell" key="NSTitleCell">
 								<int key="NSCellFlags">67239424</int>
@@ -1719,6 +1727,7 @@
 							<int key="NSvFlags">266</int>
 							<string key="NSFrame">{{-12, 317}, {818, 5}}</string>
 							<reference key="NSSuperview" ref="321268997"/>
+							<reference key="NSWindow"/>
 							<string key="NSOffsets">{0, 0}</string>
 							<object class="NSTextFieldCell" key="NSTitleCell">
 								<int key="NSCellFlags">67239424</int>
@@ -1741,6 +1750,7 @@
 							<int key="NSvFlags">258</int>
 							<string key="NSFrame">{{336, 14}, {422, 14}}</string>
 							<reference key="NSSuperview" ref="321268997"/>
+							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="953650244">
 								<int key="NSCellFlags">67239488</int>
@@ -1757,6 +1767,7 @@
 							<int key="NSvFlags">292</int>
 							<string key="NSFrame">{{13, 8}, {29, 25}}</string>
 							<reference key="NSSuperview" ref="321268997"/>
+							<reference key="NSWindow"/>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSButtonCell" key="NSCell" id="423997742">
 								<int key="NSCellFlags">-2080244224</int>
@@ -1779,11 +1790,14 @@
 							<object class="NSPSMatrix" key="NSDrawMatrix"/>
 							<string key="NSFrame">{{587, 339}, {168, 20}}</string>
 							<reference key="NSSuperview" ref="321268997"/>
+							<reference key="NSWindow"/>
 							<int key="NSpiFlags">24586</int>
 							<double key="NSMaxValue">1</double>
 						</object>
 					</object>
 					<string key="NSFrameSize">{775, 382}</string>
+					<reference key="NSSuperview"/>
+					<reference key="NSWindow"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1680, 1028}}</string>
 				<string key="NSMinSize">{775, 404}</string>
@@ -2510,7 +2524,7 @@ cxynKfJvG8cZ2meaRtGuTEzjGffNYAgwJ6qCwnHkdp1dUgQ4AIAQAIDoSohA3h8HiOwcg8BtDVG8Okcw
 AAEAEQAAAQEAAwAAAAEAEQAAAQIAAwAAAAQAAASuAQMAAwAAAAEABQAAAQYAAwAAAAEAAgAAAREABAAA
 AAEAAAAIARIAAwAAAAEAAQAAARUAAwAAAAEABAAAARYAAwAAAAEAEQAAARcABAAAAAEAAAPsARwAAwAA
 AAEAAQAAAT0AAwAAAAEAAgAAAVIAAwAAAAEAAQAAAVMAAwAAAAQAAAS2h3MABwAAGewAAAS+AAAAAAAI
-AAgACAAIAAEAAQABAAEAABnsYXBwbAIQAABtbnRyUkdCIFhZWiAH2gAJAA8AEQAyACRhY3NwQVBQTAAA
+AAgACAAIAAEAAQABAAEAABnsYXBwbAIQAABtbnRyUkdCIFhZWiAH2wABAAYAFgAVAABhY3NwQVBQTAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA9tYAAQAAAADTLWFwcGwAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABFkZXNjAAABUAAAAGJkc2NtAAABtAAAAkJjcHJ0AAAD+AAA
 ANB3dHB0AAAEyAAAABRyWFlaAAAE3AAAABRnWFlaAAAE8AAAABRiWFlaAAAFBAAAABRyVFJDAAAFGAAA
@@ -2527,7 +2541,7 @@ AEwAQwBEAEwAQwBEACAAYwBvAHUAbABlAHUAcgBMAEMARAAgAEMAbwBsAG8AcgBpAGQAbwBMAEMARAAg
 AGEAIABDAG8AcgBlAHNfaYJyACAATABDAEQATABDAEQAIABjAG8AbABvAHIwqzDpMPwAIABMAEMARAQm
 BDIENQRCBD0EPgQ5ACAEFgQaAC0ENAQ4BEEEPwQ7BDUEOQBGAOQAcgBnAC0ATABDAERfaYJybbJmdphv
 eTpWaABGAGEAcgBiAC0ATABDAEQAVgDkAHIAaQAtAEwAQwBEAEwAQwBEACAAYwBvAGwAbwByAGnO7Lfs
-ACAATABDAEQAAHRleHQAAAAAQ29weXJpZ2h0IEFwcGxlLCBJbmMuLCAyMDEwAAAAAAAAAAAAAAAAAAAA
+ACAATABDAEQAAHRleHQAAAAAQ29weXJpZ2h0IEFwcGxlLCBJbmMuLCAyMDExAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABYWVogAAAAAAAA81IAAQAAAAEWz1hZ
@@ -4849,8 +4863,8 @@ Gu62H4AOG0HsXTPAaeIHJmZkrmiVR0a8a8WxLGgdSDSBSGIwLdHbSJOpRFJC5cIHFnR/QrQxShR+KLSo
 SuLTSSJeICAADwEAAAMAAAABACAAAAEBAAMAAAABACAAAAECAAMAAAAEAAANagEDAAMAAAABAAUAAAEG
 AAMAAAABAAIAAAERAAQAAAABAAAACAESAAMAAAABAAEAAAEVAAMAAAABAAQAAAEWAAMAAAABACAAAAEX
 AAQAAAABAAAMqAEcAAMAAAABAAEAAAE9AAMAAAABAAIAAAFSAAMAAAABAAEAAAFTAAMAAAAEAAANcodz
-AAcAABnsAAANegAAAAAACAAIAAgACAABAAEAAQABAAAZ7GFwcGwCEAAAbW50clJHQiBYWVogB9oACQAP
-ABEAMgAkYWNzcEFQUEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPbWAAEAAAAA0y1hcHBsAAAAAAAA
+AAcAABnsAAANegAAAAAACAAIAAgACAABAAEAAQABAAAZ7GFwcGwCEAAAbW50clJHQiBYWVogB9sAAQAG
+ABYAFQAAYWNzcEFQUEwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPbWAAEAAAAA0y1hcHBsAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAARZGVzYwAAAVAAAABiZHNjbQAA
 AbQAAAJCY3BydAAAA/gAAADQd3RwdAAABMgAAAAUclhZWgAABNwAAAAUZ1hZWgAABPAAAAAUYlhZWgAA
 BQQAAAAUclRSQwAABRgAAAgMYWFyZwAADSQAAAAgdmNndAAADUQAAAYSbmRpbgAAE1gAAAY+Y2hhZAAA
@@ -4867,7 +4881,7 @@ AHIAaQBkAG8ATABDAEQAIABhACAAQwBvAHIAZQBzX2mCcgAgAEwAQwBEAEwAQwBEACAAYwBvAGwAbwBy
 MKsw6TD8ACAATABDAEQEJgQyBDUEQgQ9BD4EOQAgBBYEGgAtBDQEOARBBD8EOwQ1BDkARgDkAHIAZwAt
 AEwAQwBEX2mCcm2yZnaYb3k6VmgARgBhAHIAYgAtAEwAQwBEAFYA5AByAGkALQBMAEMARABMAEMARAAg
 AGMAbwBsAG8AcgBpzuy37AAgAEwAQwBEAAB0ZXh0AAAAAENvcHlyaWdodCBBcHBsZSwgSW5jLiwgMjAx
-MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+MQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAWFlaIAAA
 AAAAAPNSAAEAAAABFs9YWVogAAAAAAAAYfoAADnGAAAF11hZWiAAAAAAAABtcQAArP4AABwTWFlaIAAA

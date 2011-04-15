@@ -233,9 +233,11 @@ static BOOL loadThreaded = true;
 	
 	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:FRIENDS_REF] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
 	[theRequest setMainDocumentURL:[NSURL URLWithString:FRIENDS_PAGE]];
-	[theRequest addValue:@"text/html, */*" forHTTPHeaderField:@"Accept"];
+	/*
+	[theRequest addValue:@"text/html, * /*" forHTTPHeaderField:@"Accept"];
 	[theRequest addValue:@"http://live.xbox.com:80/en-US/friendcenter?xr=shellnav" forHTTPHeaderField:@"Referer"];
 	[theRequest addValue:@"Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_4; en-us) AppleWebKit/533.18.1 (KHTML, like Gecko) Version/5.0.2 Safari/533.18.5" forHTTPHeaderField:@"User-Agent"];
+	*/
 	[theRequest addValue:@"XMLHttpRequest" forHTTPHeaderField:@"X-Requested-With"];
 	
 	NSURLConnection *theConnection = [[NSURLConnection alloc] initWithRequest:theRequest delegate:self];

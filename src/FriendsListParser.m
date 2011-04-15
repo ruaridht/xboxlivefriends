@@ -185,11 +185,12 @@
 		richPresence = [richPresence replace:@"\r" with:@"\n"];
 		richPresence = [richPresence replace:@"Playing " with:@""];
 		richPresence = [richPresence replace:@"online " with:@""];
+		richPresence = [richPresence replace:@"playing " with:@""];
 		
 		richPresence = [richPresence stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 		richPresence = [richPresence replace:@"\n" with:STATUS_NEW_LINE_REPLACEMENT];
 		richPresence = [richPresence replace:@"   " with:@" "];
-		
+		richPresence = [MQFunctions flattenHTML:richPresence];
 		
 		XBFriend *theFriend = [XBFriend friendWithTag:gamertag tileURLString:gamertileURL statusString:status infoString:richPresence];
 		

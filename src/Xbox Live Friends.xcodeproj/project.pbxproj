@@ -208,6 +208,8 @@
 		55C79A3A1178A615006CFA67 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C79A391178A615006CFA67 /* Security.framework */; };
 		55DC2F01119372F70013CDA4 /* highlightGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 55DC2F00119372F70013CDA4 /* highlightGradient.png */; };
 		55F170A91181F7A90027D69E /* RecentlyPlayedParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 55F170A81181F7A90027D69E /* RecentlyPlayedParser.m */; };
+		55FA5A8E1280780100A4FBB5 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 55FA5A8D1280780100A4FBB5 /* NSData+Base64.m */; };
+		55FA7656128AC04600451B7F /* NotifyPopup.wav in Resources */ = {isa = PBXBuildFile; fileRef = 55FA7655128AC04600451B7F /* NotifyPopup.wav */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -496,6 +498,9 @@
 		55DC2F00119372F70013CDA4 /* highlightGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = highlightGradient.png; sourceTree = "<group>"; };
 		55F170A71181F7A90027D69E /* RecentlyPlayedParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RecentlyPlayedParser.h; sourceTree = "<group>"; };
 		55F170A81181F7A90027D69E /* RecentlyPlayedParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RecentlyPlayedParser.m; sourceTree = "<group>"; };
+		55FA5A8C1280780100A4FBB5 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		55FA5A8D1280780100A4FBB5 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		55FA7655128AC04600451B7F /* NotifyPopup.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = NotifyPopup.wav; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* Xbox Live Friends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Xbox Live Friends.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -615,6 +620,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				55FA7655128AC04600451B7F /* NotifyPopup.wav */,
 				3B1CB50B0A44D21600FACEB1 /* Credits.rtf */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
@@ -855,6 +861,8 @@
 				3BC753830E0F6E9900D0EF53 /* ClickableAttachedWindow.m */,
 				3B3746C10E0F376C00FB9F54 /* NSBezierPath+MCAdditions.h */,
 				3B3746C20E0F376C00FB9F54 /* NSBezierPath+MCAdditions.m */,
+				55FA5A8C1280780100A4FBB5 /* NSData+Base64.h */,
+				55FA5A8D1280780100A4FBB5 /* NSData+Base64.m */,
 				3B3746C30E0F376C00FB9F54 /* NSShadow+MCAdditions.h */,
 				3B3746C40E0F376C00FB9F54 /* NSShadow+MCAdditions.m */,
 			);
@@ -1307,6 +1315,7 @@
 				552DA7B711D655780046DA78 /* activityStyle.css in Resources */,
 				552DA7C411D655820046DA78 /* activity_body.html in Resources */,
 				552DA7C511D655820046DA78 /* activity_row.html in Resources */,
+				55FA7656128AC04600451B7F /* NotifyPopup.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1390,6 +1399,7 @@
 				5532904C118A3BA900783F08 /* StatusItemView.m in Sources */,
 				55C2FDB611A6EA0E005E54A5 /* AIPurchaseHistoryController.m in Sources */,
 				552DA7B211D64F090046DA78 /* ActivityCenterController.m in Sources */,
+				55FA5A8E1280780100A4FBB5 /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
