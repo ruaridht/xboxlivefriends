@@ -13,7 +13,7 @@
 
 #define SIGN_IN_URL		@"https://login.live.com/login.srf?wa=wsignin1.0&rpsnv=11&ct=1288697093&rver=6.0.5286.0&wp=MBI&wreply=https:%2F%2Flive.xbox.com:443%2Fxweb%2Flive%2Fpassport%2FsetCookies.ashx%3Frru%3Dhttp%253a%252f%252flive.xbox.com%252fen-US%252ffriendcenter%253fxr%253dshellnav&lc=1033&cb=reason%3D0%26returnUrl%3Dhttp%253a%252f%252flive.xbox.com%252fen-US%252ffriendcenter%253fxr%253dshellnav&id=66262"
 #define FRIENDS_REF		@"http://live.xbox.com:80/en-US/friendcenter/Friends"
-#define	FRIENDS_PAGE	@"http://live.xbox.com:80/en-US/friendcenter?xr=shellnav"
+#define	FRIENDS_PAGE	@"http://live.xbox.com/en-US/friendcenter?xr=shellnav"
 #define DEFAULT_PAGE	@"http://www.xbox.com/"
 #define SHELLGAMERCARD	@"http://live.xbox.com:80/Handlers/ShellData.ashx"
 #define SIGN_OUT_URL	@"http://login.live.com/logout.srf?ct=1271868636&rver=5.5.4177.0&lc=1033&id=66262&ru=http:%2F%2Flive.xbox.com%2Fen-US%2Fdefault.aspx&lru=http%3a%2f%2fwww.xbox.com%2fen-US%2fdefault.htm%3fculture%3den-US"
@@ -57,6 +57,11 @@ NSString* signInURL = @"http://live.xbox.com/en-US/profile/Friends.aspx";
 	//[self loginToPassportWithEmail:[email stringValue] password:[password stringValue]];
 }
 
+- (void)dealloc
+{
+	[super dealloc];
+}
+
 - (void)checkConnectionAndLogin:(NSNotification *)notification
 {
 	NSLog(@"FriendsListConnectionError");
@@ -89,9 +94,11 @@ NSString* signInURL = @"http://live.xbox.com/en-US/profile/Friends.aspx";
 	}
 	*/
 	
-	[self loadURL:[NSURL URLWithString:FRIENDS_PAGE]];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeFriendsListMode" object:@"loading"];
-	[[NSNotificationCenter defaultCenter] postNotificationName:@"StatusMenuChangeStatus" object:@"Signing In"];
+	//[self loadURL:[NSURL URLWithString:FRIENDS_PAGE]];
+	//[self openConnection];
+	[self parseLoginPage];
+	//[[NSNotificationCenter defaultCenter] postNotificationName:@"ChangeFriendsListMode" object:@"loading"];
+	//[[NSNotificationCenter defaultCenter] postNotificationName:@"StatusMenuChangeStatus" object:@"Signing In"];
 }
 
 - (BOOL)loginToPassportWithEmail:(NSString *)emailAddress password:(NSString *)loginPass {
@@ -446,91 +453,119 @@ NSString* signInURL = @"http://live.xbox.com/en-US/profile/Friends.aspx";
 #pragma mark -
 #pragma mark NSURLConnection delegates
 
-- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace
+- (BOOL)connection:(NSURLConnection*)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace*)protectionSpace
 {
-	if ([protectionSpace receivesCredentialSecurely]) {
-		NSLog(@"URLConnection can authenticate against protection space: YES");
-	} else {
-		NSLog(@"URLConnection can authenticate against protection space: YES");
+	NSLog(@"canAuthenticateAgainstProtectionSpace");
+	if ([protectionSpace.authenticationMethod isEqualToString:@"NSURLAuthenticationMethodClientCertificate"]	||
+		[protectionSpace.authenticationMethod isEqualToString:@"NSURLAuthenticationMethodServerTrust"]			)
+	{
+		return NO;
 	}
-	return [protectionSpace receivesCredentialSecurely];
-}
-
-- (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
-{
-	NSLog(@"URLConnection cancelled authentication");
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-	NSLog(@"URLConnection Failed");
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
-{
-	NSLog(@"Receieved Authentication Challenge");
-	//[[challenge sender] useCredential:[NSURLCredential credentialWithUser:[email stringValue] password:[password stringValue] persistence:NSURLCredentialPersistenceForSession] forAuthenticationChallenge:challenge];
-	
-	if ([challenge previousFailureCount] == 0) {
-		NSURLCredential *newCredential;
-		newCredential = [NSURLCredential credentialWithUser:[email stringValue]
-												 password:[password stringValue]
-											  persistence:NSURLCredentialPersistencePermanent];
-		[[challenge sender] useCredential:newCredential forAuthenticationChallenge:challenge];
-	} else {
-		[[challenge sender] cancelAuthenticationChallenge:challenge];
-		NSLog(@"Bad Username Or Password");
+	else
+	{
+		return YES;
 	}
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+
+- (void)connection:(NSURLConnection*)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 {
-	NSLog(@"URLConnection received data");
-	//NSLog(@"Data: %@", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
-	[theData appendData:data];
+	NSLog(@"didCancelAuthenticationChallenge");
 }
 
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+
+- (void)connection:(NSURLConnection*)connection didFailWithError:(NSError*)error
 {
-	NSLog(@"URLConnection received response");
-	//NSLog(@"URL: %@", [[response URL] absoluteString]);
+	NSLog(@"didFailWithError");
+	//[target performSelector:action withObject:error withObject:context];
 }
 
-- (void)connection:(NSURLConnection *)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
+
+- (void)connection:(NSURLConnection*)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge*)challenge
 {
-	
+	NSLog(@"didReceiveAuthenticationChallenge");
+	//[[challenge sender] continueWithoutCredentialForAuthenticationChallenge:challenge];
+	NSURLCredential *newCredential= [NSURLCredential credentialWithUser:[email stringValue]
+															   password:[password stringValue]
+															persistence:NSURLCredentialPersistenceForSession];
+	[[challenge sender] useCredential:newCredential forAuthenticationChallenge:challenge];
 }
 
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection willCacheResponse:(NSCachedURLResponse *)cachedResponse
+
+- (void)connection:(NSURLConnection*)connection didReceiveData:(NSData*)data
 {
+	NSLog(@"didReceiveData");
+	//[responseData appendData:data];
+}
+
+
+- (void)connection:(NSURLConnection*)connection didReceiveResponse:(NSURLResponse*)aResponse
+{
+	NSLog(@"didReceiveResponse");
+	NSLog(@"URL: %@", [[aResponse URL] absoluteString]);
+	/*
+	self.response = aResponse;
+	self.responseData = [NSMutableData data];
+	 */
+}
+
+
+- (void)connection:(NSURLConnection*)connection didSendBodyData:(NSInteger)bytesWritten totalBytesWritten:(NSInteger)totalBytesWritten totalBytesExpectedToWrite:(NSInteger)totalBytesExpectedToWrite
+{
+	NSLog(@"didSendBodyData");
+}
+
+
+- (NSCachedURLResponse*)connection:(NSURLConnection*)connection willCacheResponse:(NSCachedURLResponse*)cachedResponse
+{
+	NSLog(@"willCacheResponse");
 	return cachedResponse;
 }
 
-- (NSURLRequest *)connection:(NSURLConnection *)connection willSendRequest:(NSURLRequest *)request redirectResponse:(NSURLResponse *)redirectResponse
+
+- (NSURLRequest*)connection:(NSURLConnection*)connection willSendRequest:(NSURLRequest*)request redirectResponse:(NSURLResponse*)redirectResponse
 {
+	NSLog(@"willSendRequest (from %@ to %@)", redirectResponse.URL, request.URL);
 	return request;
 }
 
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+
+- (void)connectionDidFinishLoading:(NSURLConnection*)connection
 {
-	NSLog(@"URLConnection finished loading");
-	
-	if ([self isSignedIn]) {
-		NSLog(@"Yep, we're signed in");
-		[self doneWithSignIn];
-	} else {
-		NSLog(@"Nope, we didn't sign in wtf?");
-	}
-	
-	//NSLog(@"Data: %@", [[NSString alloc] initWithData:theData encoding:NSUTF8StringEncoding]);
-	
-	//NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:FRIENDS_REF] cachePolicy:NSCach timeoutInterval:60.0];
+	NSLog(@"connectionDidFinishLoading");
+	[self checkConnection];
 }
 
-- (BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection
+
+- (BOOL)connectionShouldUseCredentialStorage:(NSURLConnection*)connection
 {
-	NSLog(@"URLConnection should use credential storage: YES");
+	NSLog(@"connectionShouldUseCredentialStorage");
 	return YES;
+}
+
+#pragma mark -
+#pragma mark Test Shit
+
+- (void)parseLoginPage
+{
+	NSMutableURLRequest *theRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://login.live.com/login.srf?wa=wsignin1.0&rpsnv=11&ct=1288697093&rver=6.0.5286.0&wp=MBI&wreply=https:%2F%2Flive.xbox.com:443%2Fxweb%2Flive%2Fpassport%2FsetCookies.ashx%3Frru%3Dhttp%253a%252f%252flive.xbox.com%252fen-US%252ffriendcenter%253fxr%253dshellnav&lc=1033&cb=reason%3D0%26returnUrl%3Dhttp%253a%252f%252flive.xbox.com%252fen-US%252ffriendcenter%253fxr%253dshellnav&id=66262"] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+	NSString *authStr = [NSString stringWithFormat:@"%@:%@", [email stringValue], [password stringValue]];
+	NSData *authData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
+	NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:80]];
+	[theRequest setValue:authValue forHTTPHeaderField:@"Authorization"];
+	NSURLConnection *theConnection = [[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+	
+	if (theConnection) {
+		theData = [[NSMutableData data] retain];
+	} else {
+		// We can't connect to xbox live.
+	}
+}
+
+- (void)checkConnection
+{
+	//NSString *friendPage = [NSString stringWithContentsOfURL:[NSURL URLWithString:FRIENDS_PAGE]];
+	//NSLog(@"%@",friendPage);
 }
 
 @end

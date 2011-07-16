@@ -31,7 +31,8 @@
 	BOOL signingOut;
 	
 	NSMutableData *theData;
-
+	
+	NSHTTPCookieStorage *cookieStorage;
 }
 
 - (IBAction)newSignInButtonClicked:(id)sender;
